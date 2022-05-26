@@ -6,6 +6,7 @@ use Source\Models\Admin;
 use Source\Models\Client;
 use Source\Services\NfseSend;
 
+
 class Nfse extends  Admin
 {
     /**
@@ -28,6 +29,15 @@ class Nfse extends  Admin
         $this->message->title("Processando NFSe")->success("A nota foi trasmitida e está sendo processada.")->flash();
         redirect('/admin/clients/home');
     }
+
+    public function checkNfse()
+    {
+        $nfse = (new \Source\Models\Nfse())->find('status = "processando_autorizacao"');
+        $send = new NfseSend();
+
+
+    }
+
 
 
 

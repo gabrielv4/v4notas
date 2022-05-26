@@ -38,6 +38,9 @@ class NfseSend
     protected $endpoint;
 
     /** @var */
+    protected $codeAccess;
+
+    /** @var */
     protected $method;
 
     /** @var */
@@ -61,6 +64,7 @@ class NfseSend
         $this->company = CONF_NFSE_COMPANY;
         $this->message = new Message();
         $this->nfse = new Nfse();
+        $this->codeAccess = base64_encode(date_fmt_app());
     }
 
     /**
@@ -113,6 +117,7 @@ class NfseSend
         $this->method = 'DELETE';
         $this->endpoint = "/v2/hooks/{$id}";
 
+
         $this->dispatch();
     }
 
@@ -135,7 +140,7 @@ class NfseSend
             return true;
         }
 
-        $this->endpoint = "/v2/nfse?ref=" . $this->order->id;
+        $this->endpoint = "/v2/nfse?ref=" . $this->codeAccess;
         $this->fields = [
             "data_emissao" => date_fmt_app(),
             "incentivador_cultural" => "false",
@@ -169,6 +174,7 @@ class NfseSend
             $this->nfse->client_id = $this->order->id;
             $this->nfse->send_init = true;
             $this->nfse->status = 'processando_autorizacao';
+            $this->nfse->invoice_code = $this->codeAccess;
             $this->nfse->save();
             return true;
         }
@@ -210,6 +216,25 @@ class NfseSend
         return false;
     }
 
+    public function cancelNfse(string $id, string $justification)
+    {
+        $this->method = 'DELETE';
+        $this->endpoint = "/v2/nfse/{$id}";
+        $this->fields = ["justificativa" => $justification];
+
+        if ($this->dispatch()) {
+            echo "Tudo certo, nota cancelada com sucesso!";
+            return true;
+        }
+
+        echo "Parece que ocorreu algum erro";
+        echo "<br/>";
+        echo $this->response->erros->codigo. " ".$this->response->erros->mensagem;
+        return false;
+    }
+
+
+
     /**
      * @return bool
      */
@@ -244,4 +269,6 @@ class NfseSend
             return false;
         }
     }
+
+
 }

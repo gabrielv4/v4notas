@@ -34,7 +34,8 @@ class Nfse extends Model
         string $link,
         string $status,
         string $error,
-        string $send_at
+        string $send_at,
+        string $invoice_code
 
     ): Admin {
         $this->client_id = $client_id;
@@ -43,6 +44,7 @@ class Nfse extends Model
         $this->status = $status;
         $this->error = $error;
         $this->send_at = $send_at;
+        $this->invoice_code = $invoice_code;
         return $this;
     }
 
@@ -53,6 +55,17 @@ class Nfse extends Model
             return (new Client())->findById($this->client_id);
         }
         return null;
+    }
+
+    /**
+     * @param int $id
+     * @param string $columns
+     * @return null|mixed|Model
+     */
+    public function findByCode(string $code, string $columns = "*"): ?Model
+    {
+        $find = $this->find("invoice_code = :code", "code={$code}", $columns);
+        return $find->fetch();
     }
 
     /**

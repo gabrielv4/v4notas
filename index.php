@@ -12,12 +12,15 @@ use Source\Core\Session;
 $session = new Session();
 $route = new Router(url(), ":");
 $route->namespace("Source\App");
+$route->get("/beta", "Beta:home");
+
 
 $route->namespace("Source\App\Admin");
 $route->group(null);
 $route->get("/", "Login:root");
 $route->get("/login", "Login:login");
 $route->post("/login", "Login:login");
+
 
 /* ==================================================================================== */
 /**
