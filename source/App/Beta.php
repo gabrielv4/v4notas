@@ -10,32 +10,22 @@ class Beta extends Client
 {
     public function home(?array $data)
     {
-//        $nfse = (new Nfse())->find('status = "processando_autorizacao"')->fetch(true);
-//
-//        if(!empty($nfse)){
-//            foreach ($nfse as $item){
-//                $nf = (new NfseSend())->setOrder((new Client())->findById($item->client_id));
-//
-//                $findNfse = (new Nfse())->findById($item->id);
-//                $nf->getinfo();
-//                $findNfse->link = $nf->response()->url_danfse;
-//                $findNfse->status = $nf->response()->status;
-//                $findNfse->send_at = date_fmt_app();
-//                if(!$findNfse->save()){
-//                    echo "Algo deu errado";
-//                    echo $findNfse->message->render();
-//                }else{
-//                    echo "Funcionou!!!!";
-//                }
-//                return;
-//            }
-//        }
+        $nfse = (new Nfse())->find('status = "processando_autorizacao"')->fetch(true);
 
-        $code = (new Nfse())->findByCode('MjAyMi0wNS0yNSAyMjowMjo1MQ==');
-        $nf = (new NfseSend())->setOrder((new Client())->findById($code->client_id));
-        $nf->cancelNfse('MjAyMi0wNS0yNSAyMjowMjo1MQ==','Teste de cancelamento de nota');
+        if(!empty($nfse)){
+            foreach ($nfse as $item){
 
-        //$nfse = (new NfseSend())->cancelNfse('MjAyMi0wNS0yNSAyMjowMjo1MQ==','Teste de cancelamento de nota');
+                $nf = (new NfseSend())->setNfse((new Nfse())->findByCode($item->invoice_code));
+                $nf->getinfo();
+
+            }
+        }
+
+//        $code = (new Nfse())->findByCode('MjAyMi0wNS0yNSAyMjowMjo1MQ==');
+//        $nf = (new NfseSend())->setNfse((new Nfse())->findByCode('MjAyMi0wNS0yNiAwODozMDowMg=='));
+//        $nf->cancelNfse('MjAyMi0wNS0yNiAwODozMDowMg==','Teste de cancelamento de nota');
+//        $nf->getinfo();
+
 
 
     }

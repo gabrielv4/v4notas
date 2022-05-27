@@ -62,7 +62,7 @@
 
     // Você deve definir isso globalmente para sua aplicação
     //Substituir pela sua identificação interna da nota
-    $ref = "MjAyMi0wNS0yNSAyMjowMjo1MQ==";
+    $ref = "MjAyMi0wNS0yNiAyMDoyMDoxNw==";
     $login = "QAWTWpN0SQgSxkbbU7iaa8AiFv6MNSgW";
     $password = "";
     // Para ambiente de produção use a variável abaixo:

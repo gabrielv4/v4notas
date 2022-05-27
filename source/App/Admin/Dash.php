@@ -3,6 +3,7 @@
 namespace Source\App\Admin;
 
 use Source\Models\AuthAdmin;
+use Source\Models\Client;
 use Source\Models\Nfse;
 use Source\Support\Pager;
 
@@ -37,7 +38,7 @@ class Dash extends Auth
         //search redirect
         if (!empty($data["s"])) {
             $s = str_search($data["s"]);
-            echo json_encode(["redirect" => url("/funcionario/dash/home/{$s}/1")]);
+            echo json_encode(["redirect" => url("/admin/dash/home/{$s}/1")]);
             return;
         }
 
@@ -46,16 +47,19 @@ class Dash extends Auth
 
         if (!empty($data["search"]) && str_search($data["search"]) != "all") {
             $search = str_search($data["search"]);
-            $nfse = (new Nfse())->find("MATCH(name_client, code) AGAINST(:s)", "s={$search}");
+
+            $nfse = (new Nfse())->find("MATCH(name_client) AGAINST(:s)", "s={$search}");
+
             if (!$nfse->count()) {
                 $this->message->info("Sua pesquisa não retornou resultados")->flash();
-                redirect("/funcionario/dash/home");
+                redirect("/admin/dash/home");
             }
         }
 
         $all = ($search ?? "all");
-        $pager = new Pager(url("/funcionario/dash/home/{$all}/"));
+        $pager = new Pager(url("/admin/dash/home/{$all}/"));
         $pager->pager($nfse->count(), 5, (!empty($data["page"]) ? $data["page"] : 1));
+
 
         $head = $this->seo->render(
             CONF_SITE_NAME . " | Admin",
@@ -71,6 +75,7 @@ class Dash extends Auth
             "nfse" => $nfse->limit($pager->limit())->offset($pager->offset())->order("id DESC")->fetch(true),
             "paginator" => $pager->render(),
             "search" => $search,
+
         ]);
     }
 

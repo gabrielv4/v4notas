@@ -4,6 +4,10 @@
 <section class="dash_content_app">
     <header class="dash_content_app_header">
         <h2 class="icon-home">Dash</h2>
+        <form action="<?= url("/admin/dash/home"); ?>" method="post" class="app_search_form">
+            <input type="text" name="s" value="<?= $search; ?>" placeholder="Pesquisar OS:">
+            <button class="icon-search icon-notext"></button>
+        </form>
     </header>
 
     <div class="dash_content_app_box">
@@ -13,6 +17,7 @@
 
                     <div class="message info icon-info">Ainda não existem notas cadastrados.</div>
                 <?php else : ?>
+
                     <table class="table">
                         <tr>
                             <thead>
@@ -27,7 +32,7 @@
                         <tbody>
                         <?php foreach ($nfse as $invoice) : ?>
                             <tr>
-                                <td><?= $invoice->client()->company_name ?></td>
+                                <td><?= $invoice->name_client ?></td>
                                 <td><?= $invoice->status ?></td>
                                 <td><a class="btn btn-default" href="<?= $invoice->link?>" target="_blank"> Nota</a></td>
                                 <td><?= date_fmt($invoice->send_at) ?></td>
@@ -44,7 +49,7 @@
                 <?php endif; ?>
             </div>
 
-
+            <?= $paginator; ?>
         </section>
     </div>
 </section>

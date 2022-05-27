@@ -443,7 +443,7 @@ p {
 }
 
 .paginator a:hover {
-    background: var(--color-gold);
+    background: var(--color-red);
     background-size: 200%;
     color: #FBFBFB;
 }
@@ -677,7 +677,7 @@ p {
     padding: 5px 10px;
     border: none;
     border-left: 0;
-    background: var(--color-gold);
+    background: var(--color-red);
     color: #FFFFFF;
     cursor: pointer;
 
@@ -688,7 +688,7 @@ p {
 }
 
 .app_search_form button:hover {
-    background: var(--hover-color-yellow);
+    background: var(--hover-color-red);
 }
 
 /*BUTTONS*/
@@ -945,7 +945,7 @@ p {
 .dash_userbar_box .mobile_menu {
     display: none;
     padding: 5px 10px;
-    background: var(--color-gold);
+    background: var(--color-red);
     color: #FFFFFF;
     cursor: pointer;
 
@@ -955,7 +955,7 @@ p {
 }
 
 .dash_userbar_box .mobile_menu:hover {
-    background: var(--hover-color-yellow);
+    background: var(--hover-color-red);
 }
 
 /*content*/

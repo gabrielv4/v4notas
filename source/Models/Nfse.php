@@ -20,6 +20,7 @@ class Nfse extends Model
 
     /**
      * @param string $client_id
+     * @param string $name_client
      * @param string $send_init
      * @param string $link
      * @param string $status
@@ -30,6 +31,7 @@ class Nfse extends Model
      */
     public function bootstrap(
         string $client_id,
+        string $name_client,
         string $send_init,
         string $link,
         string $status,
@@ -39,6 +41,7 @@ class Nfse extends Model
 
     ): Admin {
         $this->client_id = $client_id;
+        $this->name_client = $name_client;
         $this->send_init = $send_init;
         $this->link = $link;
         $this->status = $status;

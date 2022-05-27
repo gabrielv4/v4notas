@@ -110,9 +110,11 @@ class Client extends Model
         return $find->fetch();
     }
 
-
-
-
+    public function findByName(string $name, string $columns = "*"): ?Client
+    {
+        $find = $this->find("company_name = :company_name ", "company_name={$name}", $columns);
+        return $find->fetch();
+    }
 
 
     /**

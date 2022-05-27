@@ -95,6 +95,16 @@ class NfseSend
     }
 
     /**
+     * @param Nfse $nfse
+     * @return $this
+     */
+    public function setNfse(Nfse $nfse): NfseSend
+    {
+        $this->nfse = $nfse;
+        $this->apiReference = $nfse->invoice_code;
+        return $this;
+    }
+    /**
      *
      */
     public function setNotificationWebhook()
@@ -172,14 +182,16 @@ class NfseSend
 
         if ($this->dispatch()) {
             $this->nfse->client_id = $this->order->id;
+            $this->nfse->name_client = $this->order->company_name;
             $this->nfse->send_init = true;
-            $this->nfse->status = 'processando_autorizacao';
+            $this->nfse->status = (empty($this->nfse->link) ?  'processando_autorizacao' : 'autorizado' );
             $this->nfse->invoice_code = $this->codeAccess;
             $this->nfse->save();
             return true;
         }
 
         $this->nfse->client_id = $this->order->id;
+        $this->nfse->name_client = $this->order->company_name;
         $this->nfse->status = 'erro_autorizacao';
         $this->nfse->error = $this->response->erros->mensagem;
         $this->nfse->save();
@@ -223,13 +235,19 @@ class NfseSend
         $this->fields = ["justificativa" => $justification];
 
         if ($this->dispatch()) {
-            echo "Tudo certo, nota cancelada com sucesso!";
-            return true;
+            if (!empty($this->response->status) && $this->response->status == 'autorizado') {
+                $this->nfse->status = $this->response->status;
+                return true;
+            }
+
+            if (!empty($this->response->status) && $this->response->status == 'erro_autorizacao') {
+                echo "Parece que ocorreu algum erro";
+                echo "<br/>";
+                echo $this->response->erros->codigo. " ".$this->response->erros->mensagem;
+            }
         }
 
-        echo "Parece que ocorreu algum erro";
-        echo "<br/>";
-        echo $this->response->erros->codigo. " ".$this->response->erros->mensagem;
+
         return false;
     }
 

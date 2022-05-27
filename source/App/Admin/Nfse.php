@@ -30,13 +30,26 @@ class Nfse extends  Admin
         redirect('/admin/clients/home');
     }
 
-    public function checkNfse()
-    {
-        $nfse = (new \Source\Models\Nfse())->find('status = "processando_autorizacao"');
-        $send = new NfseSend();
+   public function deleteNfse(?array $data)
+   {
+       $code = (new \Source\Models\Nfse())->findByCode($data['invoice_code']);
 
+       if(!empty($code)){
+           $nf = (new NfseSend())->setNfse((new \Source\Models\Nfse())->findByCode($data['invoice_code']));
+           $nf->getinfo();
+           if($nf->cancelNfse($data['invoice_code'], $data['justification'])){
+               $this->message->title("Processando NFSe")->success("A nota fiscal foi cancelada com sucesso!")->flash();
+               redirect('/admin/clients/home');
+           }
+           $this->message->title("Processando NFSe")->error("Erro ao cancelar a nota tente novamente mais tarde")->flash();
+           redirect('/admin/clients/home');
 
-    }
+       }else{
+           $this->message->title("Processando NFSe")->error("A Nfse que você tentou cancelar não existe")->flash();
+           redirect('/admin/clients/home');
+       }
+
+   }
 
 
 
