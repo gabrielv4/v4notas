@@ -208,7 +208,7 @@ class NfseSend
      */
     public function getinfo(): bool
     {
-        $this->endpoint = "/v2/nfse/" . $this->apiReference;
+        $this->endpoint = "/v2/nfse/" . $this->nfse->invoice_code;
         if ($this->dispatch()) {
 
             if (!empty($this->response->status) && $this->response->status == 'autorizado') {
@@ -216,35 +216,41 @@ class NfseSend
                 $this->nfse->status = $this->response->status;
                 $this->nfse->send_at = date_fmt_app();
                 return $this->nfse->save();
+
             }
 
             if (!empty($this->response->status) && $this->response->status == 'erro_autorizacao') {
                 $this->nfse->status = $this->response->status;
                 $this->nfse->error = $this->response->erros->mensagem;
-                return $this->nfse->save();
+                $this->nfse->save();
+                return true;
 
             }
         }
         return false;
     }
 
-    public function cancelNfse(string $id, string $justification)
+    public function cancelNfse(string $id, string $justification): bool
     {
         $this->method = 'DELETE';
         $this->endpoint = "/v2/nfse/{$id}";
         $this->fields = ["justificativa" => $justification];
 
         if ($this->dispatch()) {
-            if (!empty($this->response->status) && $this->response->status == 'autorizado') {
+
+            if (!empty($this->response->status) && $this->response->status == 'cancelado') {
+                $this->nfse->status = 'cancelada';
+                return $this->nfse->save();
+            }
+
+            if (!empty($this->response->status) && $this->response->status == 'erro_cancelamento') {
                 $this->nfse->status = $this->response->status;
+                $this->nfse->error = $this->response->erros->mensagem;
+                $this->nfse->save();
                 return true;
             }
 
-            if (!empty($this->response->status) && $this->response->status == 'erro_autorizacao') {
-                echo "Parece que ocorreu algum erro";
-                echo "<br/>";
-                echo $this->response->erros->codigo. " ".$this->response->erros->mensagem;
-            }
+
         }
 
 

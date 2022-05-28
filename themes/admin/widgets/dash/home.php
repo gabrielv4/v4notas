@@ -22,6 +22,7 @@
                         <tr>
                             <thead>
                             <th>Cliente</th>
+                            <th>CNPJ</th>
                             <th>Status</th>
                             <th>Nota</th>
                             <th>Data de Envio</th>
@@ -33,14 +34,11 @@
                         <?php foreach ($nfse as $invoice) : ?>
                             <tr>
                                 <td><?= $invoice->name_client ?></td>
+                                <td><?= $invoice->client()->cnpj ?></td>
                                 <td><?= $invoice->status ?></td>
                                 <td><a class="btn btn-default" href="<?= $invoice->link?>" target="_blank"> Nota</a></td>
                                 <td><?= date_fmt($invoice->send_at) ?></td>
-                                <td> <a class="icon-trash-o btn btn-red" title="" href="#"
-                                        data-post="<?= url("admin/clients/areaClient"); ?>"
-                                        data-action="delete"
-                                        data-confirm="Tem certeza que deseja deletar esse cliente?"
-                                        data-client_id="<?= $invoice->id; ?>">Cancelar</a></td>
+                                <td> <a class="icon-trash-o btn btn-red modalNfse" id="<?=$invoice->invoice_code?>">Cancelar</a></td>
                             </tr>
                         <?php endforeach; ?>
 
@@ -53,4 +51,28 @@
         </section>
     </div>
 </section>
+
+<!--JANELA MODAL-->
+<div id="modalNfse" class="modal-container">
+    <div class="modal-content">
+        <button class="fechar">X</button>
+        <h2 class="subtitulo">Cancelamento de Nota</h2>
+        <br>
+        <div class="content-info">
+            <p><strong>Nome: </strong> <span class="invoice_name_client"></span></p>
+            <p><strong>CNPJ: </strong> <span class="invoice_cnpj_client"></span></p>
+            <p><strong>Emissão: </strong> <span class="invoice_date_nfse"></span></p>
+        </div>
+        <br>
+        <form action="<?=url('/admin/nfse/cancelamento')?>" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="invoice_code" id="invoice_code" >
+            <fieldset class="form-model">
+                <textarea name="justification" id="justification" placeholder="Informe a justificativa para o cancelamento" class="textarea-model"></textarea>
+            </fieldset>
+            <fieldset class="fieldset_model">
+                <button class="btn-question btn-no">Confirmar cancelamento</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
 

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="<?= url("/shared/styles/boot.css"); ?>"/>
     <link rel="stylesheet" href="<?= url("/shared/styles/styles.css"); ?>"/>
     <link rel="stylesheet" href="<?= theme("/assets/css/style.css", CONF_VIEW_ADMIN); ?>"/>
+    <link rel="stylesheet" href="<?= theme("/assets/css/modal.css", CONF_VIEW_ADMIN); ?>"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
     <link rel="icon" type="image/png" href="<?= theme("/assets/images/favicon.png", CONF_VIEW_ADMIN); ?>"/>
@@ -80,6 +81,7 @@
 <script src="<?= url("/shared/scripts/tinymce/tinymce.min.js"); ?>"></script>
 <script src="<?= theme("/assets/js/scripts.js", CONF_VIEW_ADMIN); ?>"></script>
 <script src="<?= theme("/assets/js/base.js", CONF_VIEW_ADMIN); ?>"></script>
+<script src="<?= theme("/assets/js/modal.js", CONF_VIEW_ADMIN); ?>"></script>
 
 <?= $v->section("scripts"); ?>
 

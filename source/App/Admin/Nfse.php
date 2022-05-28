@@ -22,32 +22,32 @@ class Nfse extends  Admin
         $nfe = (new NfseSend())->setOrder($order);
 
         if (!$nfe->sendNfSe()) {
-            $nfe->message()->ajax();
+            $this->message->title("Processando NFSe")->error("Erro ao cadastrar a nota verifique os dados")->flash();
+            redirect('/admin/dash/home');
             return;
         }
 
         $this->message->title("Processando NFSe")->success("A nota foi trasmitida e está sendo processada.")->flash();
-        redirect('/admin/clients/home');
+        redirect('/admin/dash/home');
     }
 
-   public function deleteNfse(?array $data)
+   public function deleteNfse(array $data)
    {
        $code = (new \Source\Models\Nfse())->findByCode($data['invoice_code']);
 
-       if(!empty($code)){
-           $nf = (new NfseSend())->setNfse((new \Source\Models\Nfse())->findByCode($data['invoice_code']));
-           $nf->getinfo();
-           if($nf->cancelNfse($data['invoice_code'], $data['justification'])){
-               $this->message->title("Processando NFSe")->success("A nota fiscal foi cancelada com sucesso!")->flash();
-               redirect('/admin/clients/home');
-           }
-           $this->message->title("Processando NFSe")->error("Erro ao cancelar a nota tente novamente mais tarde")->flash();
-           redirect('/admin/clients/home');
-
-       }else{
+       if(empty($code)){
            $this->message->title("Processando NFSe")->error("A Nfse que você tentou cancelar não existe")->flash();
-           redirect('/admin/clients/home');
+           redirect('/admin/dash/home');
+           return;
        }
+
+       $nf = (new NfseSend())->setNfse($code);
+       $nf->cancelNfse($data['invoice_code'], $data['justification']);
+       $nf->getinfo();
+
+       $this->message->success("Nota cancelada com sucesso!")->flash();
+       echo json_encode(["reload" => true]);
+       return;
 
    }
 

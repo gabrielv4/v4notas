@@ -21,11 +21,12 @@ class Beta extends Client
             }
         }
 
-//        $code = (new Nfse())->findByCode('MjAyMi0wNS0yNSAyMjowMjo1MQ==');
-//        $nf = (new NfseSend())->setNfse((new Nfse())->findByCode('MjAyMi0wNS0yNiAwODozMDowMg=='));
-//        $nf->cancelNfse('MjAyMi0wNS0yNiAwODozMDowMg==','Teste de cancelamento de nota');
+        //$code = (new Nfse())->findByCode('MjAyMi0wNS0yNSAyMjowMjo1MQ==');
+//        $code ="MjAyMi0wNS0yNyAxODoyNToyMA==";
+//        $nf = (new NfseSend())->setNfse((new Nfse())->findByCode($code));
+//        $nf->cancelNfse($code,'Teste de cancelamento de nota');
 //        $nf->getinfo();
-
+//        var_dump($nf);;
 
 
     }

@@ -83,8 +83,8 @@ $route->post("/settings/updateAccount/{admin_id}", "Settings:updateAccount");
 $route->get("/nfse/{client_id}", "Nfse:createNfse");
 $route->post("/nfse/{client_id}", "Nfse:createNfse");
 
-$route->get("/nfse-cancelamento/{invoice_code}/{justification}", "Nfse:deleteNfse");
-$route->post("/nfse-cancelamento/{invoice_code}/{justification}", "Nfse:deleteNfse");
+$route->get("/nfse/cancelamento", "Nfse:deleteNfse");
+$route->post("/nfse/cancelamento", "Nfse:deleteNfse");
 
 
 /**
