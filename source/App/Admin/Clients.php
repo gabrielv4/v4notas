@@ -22,7 +22,7 @@ class Clients extends Auth
 
         if (!empty($data["search"]) && str_search($data["search"]) != "all") {
             $search = str_search($data["search"]);
-            $clients = (new Client())->find();
+            $clients = (new Client())->find("MATCH(company_name) AGAINST(:s)", "s={$search}");
             if (!$clients->count()) {
                 $this->message->info("Sua pesquisa não retornou resultados")->flash();
                 redirect("/admin/clients/home");

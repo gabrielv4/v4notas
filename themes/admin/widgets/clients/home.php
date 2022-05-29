@@ -4,6 +4,10 @@
 <section class="dash_content_app">
     <header class="dash_content_app_header">
         <h2><i class="bi bi-people"></i> Clientes / <a href="<?=url('admin/clients/areaClient')?>"><button class="button-default">Adicionar</button></a></h2>
+        <form action="<?= url("/admin/clients/home"); ?>" method="post" class="app_search_form">
+            <input type="text" name="s" value="<?= $search; ?>" placeholder="Pesquisar Cliente:">
+            <button class="icon-search icon-notext"></button>
+        </form>
     </header>
     <div class="dash_content_app_box">
         <section>

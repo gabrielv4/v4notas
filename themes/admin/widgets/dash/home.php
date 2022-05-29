@@ -5,7 +5,7 @@
     <header class="dash_content_app_header">
         <h2 class="icon-home">Dash</h2>
         <form action="<?= url("/admin/dash/home"); ?>" method="post" class="app_search_form">
-            <input type="text" name="s" value="<?= $search; ?>" placeholder="Pesquisar OS:">
+            <input type="text" name="s" value="<?= $search; ?>" placeholder="Pesquisar Nfse:">
             <button class="icon-search icon-notext"></button>
         </form>
     </header>

@@ -50,14 +50,18 @@ $route->post("/admins/home", "Admins:home");
 $route->get("/admins/areaAdmin", "Admins:areaAdmin");
 $route->post("/admins/areaAdmin", "Admins:areaAdmin");
 
-//Admin -> Clients
-$route->get("/clients/home", "Clients:home");
-$route->get("/clients/home/{search}/{page}", "Clients:home");
+
 
 //Admin Update -> admin
 $route->get("/admins/areaAdmin/{admin_id}", "Admins:areaAdmin");
 $route->post("/admins/areaAdmin/{admin_id}", "Admins:areaAdmin");
 $route->get("/admins/home/{search}/{page}", "Admins:home");
+
+//Admin -> Clients
+$route->get("/clients/home", "Clients:home");
+$route->post("/clients/home", "Clients:home");
+
+$route->get("/clients/home/{search}/{page}", "Clients:home");
 
 //Admin Update -> client
 $route->get("/clients/areaClient", "Clients:areaClient");
@@ -65,6 +69,7 @@ $route->post("/clients/areaClient", "Clients:areaClient");
 
 $route->get("/clients/areaClient/{client_id}", "Clients:areaClient");
 $route->post("/clients/areaClient/{client_id}", "Clients:areaClient");
+
 $route->get("/clients/home/{search}/{page}", "Clients:home");
 
 $route->get("/clients/status/{client_id}/{status}", "Clients:settingStatusCompany");
