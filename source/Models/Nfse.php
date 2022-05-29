@@ -72,6 +72,17 @@ class Nfse extends Model
     }
 
     /**
+     * @param int $id
+     * @param string $columns
+     * @return null|mixed|Model
+     */
+    public function findByClient(int $id, string $columns = "*"): ?array
+    {
+        $find = $this->find("client_id = :id", "id={$id}", $columns);
+        return $find->fetch(true);
+    }
+
+    /**
      * @return bool
      */
     public function save(): bool

@@ -378,6 +378,18 @@ function date_fmt_back_br(?string $date): ?string
     return (new DateTime($date))->format(CONF_DATE_APP_BR);
 }
 
+function date_fmt_back_us(?string $date): ?string
+{
+    $date = (empty($date) ? "now" : $date);
+    return (new DateTime($date))->format(CONF_DATE_APP_US);
+}
+
+function date_fmt_back_month(?string $date): ?string
+{
+    $date = (empty($date) ? "now" : $date);
+    return (new DateTime($date))->format(CONF_DATE_APP_MONTH);
+}
+
 /**
  * ####################
  * ###   PASSWORD   ###

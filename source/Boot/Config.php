@@ -66,7 +66,10 @@ define("CONF_SITE_ADDR_ZIPCODE", "07400-605");
  */
 define("CONF_DATE_BR", "d/m/Y H:i:s");
 define("CONF_DATE_APP", "Y-m-d H:i:s");
+define("CONF_DATE_APP_US", "Y-m-d");
 define("CONF_DATE_APP_BR", "d/m/Y");
+
+define("CONF_DATE_APP_MONTH", "m");
 
 setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 date_default_timezone_set('America/Sao_Paulo');
