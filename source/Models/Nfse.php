@@ -3,6 +3,8 @@
 namespace Source\Models;
 
 use Source\Core\Model;
+use Source\Core\View;
+use Source\Support\Email;
 
 /**
  *
@@ -92,6 +94,69 @@ class Nfse extends Model
         $find = $this->find("client_id = :id", "id={$id}", $columns)->order("send_at DESC")->limit(1);
         return $find->fetch(true);
     }
+
+
+
+    /**
+     * @param Nfse $invoice
+     * @param $type
+     * @return bool
+     */
+    public function sendEmailNfse(Nfse $invoice): bool
+    {
+        if(!$invoice){
+            return false;
+        }
+        $invoice->sendEmail(
+            "Nota Fiscal V4 | OR & Associados",
+            "Prezado(a) {}",
+            "AQUI"
+        )->queue();
+
+
+        return true;
+
+    }
+
+    /**
+     * @param string $title
+     * @param string $subtitle
+     * @param string $message
+     * @param string|null $link
+     * @param string|null $linkTitle
+     * @param string|null $subject
+     *
+     * @return Email
+     */
+    public function sendEmail(
+        string $title,
+        string $subtitle,
+        string $message,
+        ?string $link = null,
+        ?string $linkTitle = null,
+        ?string $subject = null
+    ): Email {
+        $view = new View(__DIR__.'/../../shared/views/email');
+        $bodyMessage = $view->render("default", [
+            "subject" => ($subject ?? $title),
+            "title" => $title,
+            "subtitle" => $subtitle,
+            "user" => $this,
+            "message" => $message,
+            "link" => $link,
+            "linkTitle" => $linkTitle
+        ]);
+
+
+        return (new Email())->setUser($this->client())->bootstrap(
+            ($subject ?? $title),
+            $bodyMessage,
+            $this->client()->financial_email,
+            "{$this->name_stakeholder}",
+            $this->id
+        );
+    }
+
 
     /**
      * @return bool

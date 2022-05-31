@@ -2,15 +2,17 @@
 
 namespace Source\Support;
 
-use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 use Source\Core\Connect;
+use Source\Models\Client;
+
 
 /**
- * FSPHP | Class Email
+ * BRAIN SUITE |  Class Email
  *
- * @author Robson V. Leite <cursos@upinside.com.br>
- * @package Source\Core
+ * @author: Vinícios Oliveira <vinicios@v8design.com.br>
+ * @package Source\Support
  */
 class Email
 {
@@ -22,6 +24,9 @@ class Email
 
     /** @var Message */
     private $message;
+
+    /** @var Client */
+    private $user;
 
     /**
      * Email constructor.
@@ -54,12 +59,19 @@ class Email
      * @param string $recipientName
      * @return Email
      */
-    public function bootstrap(string $subject, string $body, string $recipient, string $recipientName): Email
+    public function bootstrap(string $subject, string $body, string $recipient, string $recipientName, string $info = null): Email
     {
         $this->data->subject = $subject;
         $this->data->body = $body;
         $this->data->recipient_email = $recipient;
         $this->data->recipient_name = $recipientName;
+        $this->data->info = $info;
+        return $this;
+    }
+
+    public function setUser(Client $user)
+    {
+        $this->user = $user;
         return $this;
     }
 
@@ -68,12 +80,21 @@ class Email
      * @param string $fileName
      * @return Email
      */
+
     public function attach(string $filePath, string $fileName): Email
     {
         $this->data->attach[$filePath] = $fileName;
         return $this;
     }
 
+
+    public function multipleAttach(array $array, $name): Email
+    {
+        foreach ($array as $item) {
+            $this->data->attach[$item] = $name;
+        }
+        return $this;
+    }
     /**
      * @param $from
      * @param $fromName
@@ -108,6 +129,7 @@ class Email
                 }
             }
 
+
             $this->mail->send();
             return true;
         } catch (Exception $exception) {
@@ -121,13 +143,15 @@ class Email
      * @param string $fromName
      * @return bool
      */
-    public function queue(string $from = CONF_MAIL_SENDER['address'], string $fromName = CONF_MAIL_SENDER["name"]): bool
-    {
+    public function queue(
+        string $from = CONF_MAIL_SENDER['address'],
+        string $fromName = CONF_MAIL_SENDER["name"]
+    ): bool {
         try {
             $stmt = Connect::getInstance()->prepare(
                 "INSERT INTO
-                    mail_queue (subject, body, from_email, from_name, recipient_email, recipient_name)
-                    VALUES (:subject, :body, :from_email, :from_name, :recipient_email, :recipient_name)"
+                    mail_queue (subject, body, from_email, from_name, recipient_email, recipient_name, attach, user_id, invoice_id)
+                    VALUES (:subject, :body, :from_email, :from_name, :recipient_email, :recipient_name, :attach, :user_id, :invoice_id)"
             );
 
             $stmt->bindValue(":subject", $this->data->subject, \PDO::PARAM_STR);
@@ -136,6 +160,17 @@ class Email
             $stmt->bindValue(":from_name", $fromName, \PDO::PARAM_STR);
             $stmt->bindValue(":recipient_email", $this->data->recipient_email, \PDO::PARAM_STR);
             $stmt->bindValue(":recipient_name", $this->data->recipient_name, \PDO::PARAM_STR);
+            $stmt->bindValue(":user_id", !empty($this->user) ? $this->user->id : null);
+            $stmt->bindValue(":invoice_id", $this->data->info, \PDO::PARAM_STR);
+
+
+            if (!empty($this->data->attach)) {
+                foreach ($this->data->attach as $path => $name) {
+                    $stmt->bindValue(":attach", str_replace(" ", "", $path),\PDO::PARAM_STR);
+                }
+            }else{
+                $stmt->bindValue(":attach", null,\PDO::PARAM_STR);
+            }
 
             $stmt->execute();
             return true;
@@ -150,20 +185,44 @@ class Email
      */
     public function sendQueue(int $perSecond = 5)
     {
-        $stmt = Connect::getInstance()->query("SELECT * FROM mail_queue WHERE sent_at IS NULL");
+        $stmt = Connect::getInstance()->query("SELECT * FROM mail_queue WHERE sent_at IS NULL LIMIT 300");
         if ($stmt->rowCount()) {
             foreach ($stmt->fetchAll() as $send) {
-                $email = $this->bootstrap(
+                $email = (new Email())->bootstrap(
                     $send->subject,
                     $send->body,
                     $send->recipient_email,
                     $send->recipient_name
                 );
 
-                if ($email->send($send->from_email, $send->from_name)) {
+                //Se tiver anexo
+                if ($send->attach != null){
+
+                    $certificate = explode(',', $send->attach);
+                    $email->multipleAttach($certificate, "Certificado Edune");
+                    $email->send($send->from_email, $send->from_name);
+
+                    foreach ($certificate as $file){
+                        if (file_exists($file)){
+                            unlink($file);
+                        }
+                    }
+
+                    $getId = str_replace(['<', '>'], ['', ''], $this->mail->getLastMessageID());
                     usleep(1000000 / $perSecond);
-                    Connect::getInstance()->exec("UPDATE mail_queue SET sent_at = NOW() WHERE id = {$send->id}");
+                    Connect::getInstance()->exec("UPDATE mail_queue SET sent_at = NOW(), message_id = '{$getId}' WHERE id = {$send->id}");
+
+
+                    //se não tiver anexo
+                }else{
+                    if ($email->send($send->from_email, $send->from_name)) {
+                        $getId = str_replace(['<', '>'], ['', ''], $this->mail->getLastMessageID());
+                        usleep(1000000 / $perSecond);
+                        Connect::getInstance()->exec("UPDATE mail_queue SET sent_at = NOW(), message_id = '{$getId}' WHERE id = {$send->id}");
+                    }
                 }
+
+
             }
         }
     }
@@ -183,4 +242,5 @@ class Email
     {
         return $this->message;
     }
+
 }

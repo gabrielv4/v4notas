@@ -69,7 +69,7 @@ class Clients extends Auth
             $clientCreate->phone_stakeholder = $data["phone_stakeholder"];
             $clientCreate->email_stakeholder = $data["email_stakeholder"];
             $clientCreate->financial_name = $data["financial_name"];
-            $clientCreate->email_financial = $data["email_financial"];
+            $clientCreate->financial_email = $data["financial_email"];
             $clientCreate->company_name = $data["company_name"];
             $clientCreate->cnpj = $data["cnpj"];
             $clientCreate->managing_partner = $data["managing_partner"];
@@ -123,7 +123,7 @@ class Clients extends Auth
                 $clientUpdate->phone_stakeholder = $data["phone_stakeholder"];
                 $clientUpdate->email_stakeholder = $data["email_stakeholder"];
                 $clientUpdate->financial_name = $data["financial_name"];
-                $clientUpdate->email_financial = $data["email_financial"];
+                $clientUpdate->financial_email = $data["financial_email"];
                 $clientUpdate->company_name = $data["company_name"];
                 $clientUpdate->cnpj = $data["cnpj"];
                 $clientUpdate->managing_partner = $data["managing_partner"];

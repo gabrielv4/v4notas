@@ -114,13 +114,18 @@ define("CONF_IMAGE_QUALITY", ["jpg" => 75, "png" => 5]);
  * MAIL
  */
 
+define("CONF_MAIL_HOST", "delta.dhost.com.br");
+define("CONF_MAIL_PORT", "587");
+define("CONF_MAIL_USER", "dev@edunecursos.com.br");
+define("CONF_MAIL_PASS", "zrivnfs0OPo;");
+
+define("CONF_MAIL_SENDER", ["name" => "Atendimento | Edune Cursos", "address" => "ola@edunecursos.com.br"]);
+define("CONF_MAIL_SUPPORT", "");
 define("CONF_MAIL_OPTION_LANG", "br");
 define("CONF_MAIL_OPTION_HTML", true);
 define("CONF_MAIL_OPTION_AUTH", true);
 define("CONF_MAIL_OPTION_SECURE", "tls");
 define("CONF_MAIL_OPTION_CHARSET", "utf-8");
-
-define("CONF_MAIL_SUPPORT", "gabriel@digitalv8.com.br");
 
 
 

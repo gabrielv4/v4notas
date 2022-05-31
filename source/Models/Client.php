@@ -3,6 +3,9 @@
 namespace Source\Models;
 
 use Source\Core\Model;
+use Source\Core\View;
+use Source\Support\Email;
+
 
 /**
  *
@@ -50,7 +53,7 @@ class Client extends Model
         string $phone_stakeholder,
         string $email_stakeholder,
         string $financial_name,
-        string $email_financial,
+        string $financial_email,
         string $company_name,
         string $cnpj,
         string $managing_partner,
@@ -76,7 +79,7 @@ class Client extends Model
         $this->phone_stakeholder = $phone_stakeholder;
         $this->email_stakeholder = $email_stakeholder;
         $this->financial_name = $financial_name;
-        $this->email_financial = $email_financial;
+        $this->financial_email = $financial_email;
         $this->company_name = $company_name;
         $this->cnpj = $cnpj;
         $this->managing_partner = $managing_partner;
@@ -121,6 +124,46 @@ class Client extends Model
         $find = $this->find("pay_day = :day ", "day={$day}", $columns);
         return $find->fetch(true);
     }
+
+
+    /**
+     * @param string $title
+     * @param string $subtitle
+     * @param string $message
+     * @param string|null $link
+     * @param string|null $linkTitle
+     * @param string|null $subject
+     *
+     * @return Email
+     */
+    public function sendEmail(
+        string $title,
+        string $subtitle,
+        string $message,
+        ?string $link = null,
+        ?string $linkTitle = null,
+        ?string $subject = null
+    ): Email {
+        $view = new View(__DIR__.'/../../shared/views/email');
+        $bodyMessage = $view->render("default", [
+            "subject" => ($subject ?? $title),
+            "title" => $title,
+            "subtitle" => $subtitle,
+            "user" => $this,
+            "message" => $message,
+            "link" => $link,
+            "linkTitle" => $linkTitle
+        ]);
+
+
+        return (new Email())->setUser($this)->bootstrap(
+            ($subject ?? $title),
+            $bodyMessage,
+            $this->financial_email,
+            "{$this->name_stakeholder}"
+        );
+    }
+
 
 
     /**

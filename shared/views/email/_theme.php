@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title><?= $title; ?></title>
+    <title><?= $subject; ?></title>
     <style>
         body {
             -webkit-box-sizing: border-box;
@@ -46,10 +46,15 @@
         <td>
             <div class="content">
                 <?= $v->section("content"); ?>
-                <p>Atenciosamente, equipe <?= CONF_SITE_NAME; ?>.</p>
+                <p>Atenciosamente;</p>
+                <p>Equipe <?= CONF_SITE_NAME; ?><br>
+                    Conhecimento move o mundo.</p>
             </div>
             <div class="footer">
-                <p><?= CONF_SITE_NAME; ?> - <?= CONF_SITE_TITLE; ?></p>
+                <p><?= CONF_SITE_NAME; ?> <?= CONF_SITE_TITLE; ?></p>
+                <p><?= CONF_SITE_ADDR_STREET; ?>
+                    , <?= CONF_SITE_ADDR_NUMBER; ?><?= (CONF_SITE_ADDR_COMPLEMENT ? ", " . CONF_SITE_ADDR_COMPLEMENT : ""); ?></p>
+                <p><?= CONF_SITE_ADDR_CITY; ?>/<?= CONF_SITE_ADDR_STATE; ?> - <?= CONF_SITE_ADDR_ZIPCODE; ?></p>
             </div>
         </td>
     </tr>
