@@ -108,9 +108,19 @@ class Nfse extends Model
             return false;
         }
         $invoice->sendEmail(
-            "Nota Fiscal V4 | OR & Associados",
-            "Prezado(a) {}",
-            "AQUI"
+            "Emissão de NFS-e | ".CONF_SITE_NAME,
+            "",
+        "
+            <p>Prezado(a), {$invoice->client()->financial_name} </p>
+            <p>Esta mensagem refere-se à NFS-e emitida por ".CONF_SITE_NAME.", portador do CNPJ ".CONF_COMPANY_CNPJ."
+            por serviços prestados a {$invoice->client()->company_name} portadora do CNPJ {$invoice->client()->cnpj}, 
+            no dia ".date_fmt($invoice->send_at)."</p>
+           
+            <p>Para acessar a nota <a href='{$invoice->link}'>clique aqui</a>, caso não consiga abrir 
+            sua nota entre em contato</p>
+            <p></p>
+            <p><i>Caso essa nota não pertença a você por favor desconsidere este e-mail</i></p>"
+
         )->queue();
 
 

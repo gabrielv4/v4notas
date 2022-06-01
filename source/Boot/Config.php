@@ -48,6 +48,7 @@ define("CONF_NFSE_COMPANY", [
     "inscricao_municipal" => "15953",
     "codigo_municipio" => "3503901"
 ]);
+define("CONF_COMPANY_CNPJ","40.151.836/0001-01");
 
 /**
  * Information Address
@@ -119,7 +120,7 @@ define("CONF_MAIL_PORT", "587");
 define("CONF_MAIL_USER", "dev@edunecursos.com.br");
 define("CONF_MAIL_PASS", "zrivnfs0OPo;");
 
-define("CONF_MAIL_SENDER", ["name" => "Atendimento | Edune Cursos", "address" => "ola@edunecursos.com.br"]);
+define("CONF_MAIL_SENDER", ["name" => "V4 OR & ASSOCIADOS", "address" => "ola@edunecursos.com.br"]);
 define("CONF_MAIL_SUPPORT", "");
 define("CONF_MAIL_OPTION_LANG", "br");
 define("CONF_MAIL_OPTION_HTML", true);

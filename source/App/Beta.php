@@ -79,6 +79,7 @@ class Beta extends Client
 //        }
 
 
+        //Enviar e-mail
         $code = 'MjAyMi0wNS0yOCAyMjo1NzowNg==';
         $nfse = (new Nfse())->findByCode($code);
         $nfse->sendEmailNfse($nfse);

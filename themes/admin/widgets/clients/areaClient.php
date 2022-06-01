@@ -46,7 +46,7 @@
 
                     <label class="label">
                         <span class="legend">*E-mail Responsavel financeiro:</span>
-                        <input type="email" name="email_financial" id="email_financial" placeholder="Email do reposnsavel financeiro" required />
+                        <input type="email" name="financial_email" id="email_financial" placeholder="Email do reposnsavel financeiro" required />
                     </label>
 
                     <div class="btns-group">
@@ -306,7 +306,7 @@
 
                     <label class="label">
                         <span class="legend">*E-mail Responsavel financeiro:</span>
-                        <input type="email" name="email_financial" value="<?=$client->email_financial?>" id="email_financial" placeholder="Email do reposnsavel financeiro" required />
+                        <input type="email" name="financial_email" value="<?=$client->financial_email?>" id="email_financial" placeholder="Email do reposnsavel financeiro" required />
                     </label>
 
                     <label class="label">

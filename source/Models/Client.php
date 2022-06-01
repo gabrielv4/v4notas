@@ -126,45 +126,6 @@ class Client extends Model
     }
 
 
-    /**
-     * @param string $title
-     * @param string $subtitle
-     * @param string $message
-     * @param string|null $link
-     * @param string|null $linkTitle
-     * @param string|null $subject
-     *
-     * @return Email
-     */
-    public function sendEmail(
-        string $title,
-        string $subtitle,
-        string $message,
-        ?string $link = null,
-        ?string $linkTitle = null,
-        ?string $subject = null
-    ): Email {
-        $view = new View(__DIR__.'/../../shared/views/email');
-        $bodyMessage = $view->render("default", [
-            "subject" => ($subject ?? $title),
-            "title" => $title,
-            "subtitle" => $subtitle,
-            "user" => $this,
-            "message" => $message,
-            "link" => $link,
-            "linkTitle" => $linkTitle
-        ]);
-
-
-        return (new Email())->setUser($this)->bootstrap(
-            ($subject ?? $title),
-            $bodyMessage,
-            $this->financial_email,
-            "{$this->name_stakeholder}"
-        );
-    }
-
-
 
     /**
      * @return bool

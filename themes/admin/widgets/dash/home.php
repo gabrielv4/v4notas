@@ -3,7 +3,7 @@
 
 <section class="dash_content_app">
     <header class="dash_content_app_header">
-        <h2 class="icon-home">Dash</h2>
+        <h2 class="icon-home">Dash - Notas Fiscais</h2>
         <form action="<?= url("/admin/dash/home"); ?>" method="post" class="app_search_form">
             <input type="text" name="s" value="<?= $search; ?>" placeholder="Pesquisar Nfse:">
             <button class="icon-search icon-notext"></button>
@@ -35,11 +35,17 @@
                             <tr>
                                 <td><?= $invoice->name_client ?></td>
                                 <td><?= $invoice->client()->cnpj ?></td>
-                                <td><?= $invoice->status ?></td>
-                                <td><a class="btn btn-default" href="<?= $invoice->link?>" target="_blank"> Nota</a></td>
+                                <td>
+                                    <?=$invoice->status == 'autorizado' ? "<b class='mt-2 text-success d-block' ><i class='bi bi-check-lg'></i> Nota Fiscal Emitida</b>" :
+                                        ($invoice->status == 'processando_autorizacao' ? "<b class='mt-2 d-block text-info'><i class='bi bi-arrow-clockwise'></i> Processando NFSe</b>" :
+                                            ($invoice->status == 'erro_autorizacao' ? "<a class='mt-2 text-danger modalNotification linkNotification' data-error='$invoice->error' href='#' id='$invoice->id'><i class='bi bi-x-lg'></i> <b>Erro ao emitir NFSe</b></a>" : ($invoice->status == 'cancelada' ? "<b class='mt-2 d-block text-warning'><i class='bi bi-exclamation-triangle-fill'></i> Nota cancelada</b>" : "<b class='mt-2 d-block text-warning'>Nota Fiscal Pendente</b>")))?>
+                                </td>
+
+                                <td><a class="btn btn-default" <?=$invoice->link == '' ? "style='pointer-events: none;'" : ''?> href="<?=$invoice->link?>" target="_blank"> Nota</a></td>
                                 <td><?= date_fmt($invoice->send_at) ?></td>
                                 <td> <a class="icon-trash-o btn btn-red modalNfse" id="<?=$invoice->invoice_code?>">Cancelar</a></td>
                             </tr>
+
                         <?php endforeach; ?>
 
                         </tbody>
@@ -52,7 +58,9 @@
     </div>
 </section>
 
-<!--JANELA MODAL-->
+<!--JANELAS MODAIS-->
+
+<!--Cancelamento de nota-->
 <div id="modalNfse" class="modal-container">
     <div class="modal-content">
         <button class="fechar">X</button>
@@ -73,6 +81,15 @@
                 <button class="btn-question btn-no">Confirmar cancelamento</button>
             </fieldset>
         </form>
+    </div>
+</div>
+
+
+<!--Motificação Erro-->
+<div id="modalNotification" class="modal-container">
+    <div class="modal-content">
+        <button class="fechar">X</button>
+        <span class="showError"></span>
     </div>
 </div>
 
