@@ -212,7 +212,7 @@ class Clients extends Auth
         if($data['status'] == 'true'){
             $clientStatus->status = 'ativo';
         }else{
-            $clientStatus->status = 'desativo';
+            $clientStatus->status = 'inativo';
         }
 
         if (!$clientStatus->save()) {

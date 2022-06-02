@@ -15,7 +15,14 @@ class Nfse extends  Admin
     public function createNfse(array $data)
     {
         if (empty($data['client_id']) || !$order = (new Client())->findById($data['client_id'])) {
-            $this->message->title("Erro de pedido")->warning("O pedido não foi encontrado, favor atualizar a pagina e tentar novamente")->ajax();
+            $this->message->title("Erro de pedido")->warning("O pedido não foi encontrado, favor atualizar a pagina e tentar novamente")->flash();
+            redirect('/admin/clients/home');
+            return;
+        }
+
+        if($order->status != 'ativo'){
+            $this->message->warning("O cliente está com o status inativo, ative para gerar a nota")->flash();
+            redirect('/admin/clients/home');
             return;
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Source\App;
+require __DIR__.'/../vendor/autoload.php';
 
 use Source\Models\Client;
 use Source\Models\Nfse;
@@ -18,11 +18,12 @@ use Source\Services\NfseSend;
             foreach ($client as $item) {
                 //pegando as nfse dos clientes
                 $nfse = (new Nfse())->findByLasClient($item->id);
+
                     //pegando as nfse que existem dos clientes
                     if(!empty($nfse)){
                         //listandos as nfse
                         foreach ($nfse as $nf) {
-                            //ignorar as notas geradas que foram canceladas
+                            //ignorar as notas geradas que foram canceladas pegar apenas as autorizadas
                             //verificar se a ultima nfse gerada do cliente é desse mês se for ele não faz o procedimento
                             //se não ele gera uma nova nota para o mês atual
                             //Verifica se o dia é o mesmo que o cliente pedio para imprimir a nota
@@ -33,6 +34,13 @@ use Source\Services\NfseSend;
                                 $invoice = (new NfseSend())->setOrder($clientInvoice);
                                 $invoice->sendNfSe();
 
+                            //Caso ele só tenha uma nota e ela tenha sido cancelada
+                            // No mês atual ele gera um nova nota
+                            }else if($nf->status == 'cancelada' && date_fmt_back_month($nf->send_at) == date('m')
+                                && $item->pay_day == $day && $item->status == 'ativo'){
+                                $clientInvoice = (new Client())->findById($nf->client_id);
+                                $invoice = (new NfseSend())->setOrder($clientInvoice);
+                                $invoice->sendNfSe();
                             }
                         }
                     }else{

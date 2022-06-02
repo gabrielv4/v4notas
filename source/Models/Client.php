@@ -119,7 +119,7 @@ class Client extends Model
         return $find->fetch();
     }
 
-    public function findByDay(int $day, string $columns = "*"): ?array
+    public function findByDay(string $day, string $columns = "*"): ?array
     {
         $find = $this->find("pay_day = :day ", "day={$day}", $columns);
         return $find->fetch(true);

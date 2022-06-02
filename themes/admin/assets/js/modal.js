@@ -27,12 +27,13 @@ modalNfse.forEach((e) => {
 
 const modalNotification = document.querySelectorAll('.modalNotification');
 const showError = document.querySelector('.showError');
-const linkNotification = document.querySelector('.linkNotification');
+
 
 modalNotification.forEach((e) => {
     e.addEventListener('click', function(botao) {
         var contentID = botao.target.id;
-        showError.innerHTML = linkNotification.dataset.error;
+
+        showError.innerHTML = e.dataset.error;
         iniciaModal("modalNotification", contentID);
 
 

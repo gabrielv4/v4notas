@@ -261,13 +261,13 @@ class NfseSend
     {
         $this->method = 'POST';
         $this->endpoint = "/v2/nfse/{$code}/email";
-        $this->fields = ["email" => array($email)];
+        $this->fields = ["emails" => array($email)];
 
         if($this->dispatch()){
             echo "Enviado com sucesso";
             return true;
         }else{
-            echo "Erro ao enviar";
+            echo "Erro ao enviar: ".$this->response->erros->mensagem;
             return false;
         }
     }

@@ -38,12 +38,13 @@
                                 <td>
                                     <?=$invoice->status == 'autorizado' ? "<b class='mt-2 text-success d-block' ><i class='bi bi-check-lg'></i> Nota Fiscal Emitida</b>" :
                                         ($invoice->status == 'processando_autorizacao' ? "<b class='mt-2 d-block text-info'><i class='bi bi-arrow-clockwise'></i> Processando NFSe</b>" :
-                                            ($invoice->status == 'erro_autorizacao' ? "<a class='mt-2 text-danger modalNotification linkNotification' data-error='$invoice->error' href='#' id='$invoice->id'><i class='bi bi-x-lg'></i> <b>Erro ao emitir NFSe</b></a>" : ($invoice->status == 'cancelada' ? "<b class='mt-2 d-block text-warning'><i class='bi bi-exclamation-triangle-fill'></i> Nota cancelada</b>" : "<b class='mt-2 d-block text-warning'>Nota Fiscal Pendente</b>")))?>
+                                            ($invoice->status == 'erro_autorizacao' ? "<a id='$invoice->id' class='mt-2 text-danger modalNotification linkNotification' data-error='$invoice->error' href='#' ><i class='bi bi-x-lg'></i> <b>Erro ao emitir NFSe</b></a>" :
+                                                ($invoice->status == 'cancelada' ? "<b class='mt-2 d-block text-warning'><i class='bi bi-exclamation-triangle-fill'></i> Nota cancelada</b>" : "<b class='mt-2 d-block text-warning'>Nota Fiscal Pendente</b>")))?>
                                 </td>
 
                                 <td><a class="btn btn-default" <?=$invoice->link == '' ? "style='pointer-events: none;'" : ''?> href="<?=$invoice->link?>" target="_blank"> Nota</a></td>
                                 <td><?= date_fmt($invoice->send_at) ?></td>
-                                <td> <a class="icon-trash-o btn btn-red modalNfse" id="<?=$invoice->invoice_code?>">Cancelar</a></td>
+                                <td> <a class="icon-trash-o btn btn-red <?=$invoice->status == 'erro_autorizacao' or $invoice->status == 'cancelada' ? '' : 'modalNfse'?>"  id="<?=$invoice->invoice_code?>">Cancelar</a></td>
                             </tr>
 
                         <?php endforeach; ?>
