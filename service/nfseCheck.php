@@ -11,8 +11,12 @@ use Source\Models\Client;
         if(!empty($nfse)){
             foreach ($nfse as $item){
                 $nf = (new NfseSend())->setNfse((new Nfse())->findByCode($item->invoice_code));
+                $clint = (new Client())->findById($item->client_id);
                 $nf->getinfo();
 
+                (new NfseSend())->sendNfseEmail($item->invoice_code, $clint->financial_email);
+
+                //Enviar e-mail pelo servidor
                 //(new Nfse())->sendEmailNfse((new Nfse())->findByCode($item->invoice_code));
 
             }

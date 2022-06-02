@@ -44,7 +44,7 @@
 
                                 <td><a class="btn btn-default" <?=$invoice->link == '' ? "style='pointer-events: none;'" : ''?> href="<?=$invoice->link?>" target="_blank"> Nota</a></td>
                                 <td><?= date_fmt($invoice->send_at) ?></td>
-                                <td> <a class="icon-trash-o btn btn-red <?=$invoice->status == 'erro_autorizacao' or $invoice->status == 'cancelada' ? '' : 'modalNfse'?>"  id="<?=$invoice->invoice_code?>">Cancelar</a></td>
+                                <td> <a class="icon-trash-o btn btn-red <?=($invoice->status == 'erro_autorizacao' or $invoice->status == 'cancelada') ? '' : 'modalNfse'?>"  id="<?=$invoice->invoice_code?>">Cancelar</a></td>
                             </tr>
 
                         <?php endforeach; ?>

@@ -34,13 +34,7 @@ use Source\Services\NfseSend;
                                 $invoice = (new NfseSend())->setOrder($clientInvoice);
                                 $invoice->sendNfSe();
 
-                            //Caso ele só tenha uma nota e ela tenha sido cancelada
-                            // No mês atual ele gera um nova nota
-                            }else if($nf->status == 'cancelada' && date_fmt_back_month($nf->send_at) == date('m')
-                                && $item->pay_day == $day && $item->status == 'ativo'){
-                                $clientInvoice = (new Client())->findById($nf->client_id);
-                                $invoice = (new NfseSend())->setOrder($clientInvoice);
-                                $invoice->sendNfSe();
+
                             }
                         }
                     }else{

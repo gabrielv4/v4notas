@@ -264,7 +264,6 @@ class NfseSend
         $this->fields = ["emails" => array($email)];
 
         if($this->dispatch()){
-            echo "Enviado com sucesso";
             return true;
         }else{
             echo "Erro ao enviar: ".$this->response->erros->mensagem;

@@ -1537,6 +1537,8 @@ a.text-dark:focus, a.text-dark:hover {
     border-radius: .25rem;
 }
 
+
+
 /*RWD*/
 /*1280w*/
 
@@ -1572,6 +1574,12 @@ a.text-dark:focus, a.text-dark:hover {
     .dash_userbar_box .mobile_menu {
         display: block;
     }
+
+    .app_blog_home{
+        max-width: 90% !important;
+        overflow-x: scroll !important;
+    }
+
 }
 
 /*992w*/
@@ -1661,6 +1669,9 @@ a.text-dark:focus, a.text-dark:hover {
     .app_faqs_home article > div {
         flex-basis: 100%;
     }
+
+
+
 }
 
 /*540w*/
@@ -1716,4 +1727,6 @@ a.text-dark:focus, a.text-dark:hover {
     .app_blog_categories article .info {
         margin-top: 15px;
     }
+
+
 }

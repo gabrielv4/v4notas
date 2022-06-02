@@ -19,7 +19,7 @@
                     <table class="table">
                         <tr>
                             <thead>
-                                <th>Projeto</th>
+                                <th>Empresa</th>
                                 <th>StakeHolder</th>
                                 <th>Email</th>
                                 <th>Acessor</th>
@@ -33,7 +33,7 @@
                             <?php foreach ($clients as $client) : ?>
                                 <tr>
 
-                                    <td><?= $client->name_project ?></td>
+                                    <td><?= $client->company_name ?></td>
                                     <td><?= $client->name_stakeholder ?></td>
                                     <td><?= $client->email_stakeholder?></td>
                                     <td><?= $client->advisor ?></td>
