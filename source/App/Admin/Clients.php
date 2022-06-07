@@ -3,6 +3,7 @@
 namespace Source\App\Admin;
 
 use Source\Models\Client;
+use Source\Models\Nfse as NfseModel;
 use Source\Support\Pager;
 
 class Clients extends Auth 
@@ -45,7 +46,7 @@ class Clients extends Auth
         echo $this->view->render("widgets/clients/home", [
             "app" => "clients/home",
             "head" => $head,
-            "clients" => $clients->limit($pager->limit())->offset($pager->offset())->fetch(true),
+            "clients" => $clients->limit($pager->limit())->offset($pager->offset())->order('id DESC')->fetch(true),
             "paginator" => $pager->render(),
             "search" => $search,
         ]);
@@ -222,5 +223,41 @@ class Clients extends Auth
         }
 
     }
+
+
+    public function nfseClient(?array $data)
+    {
+        //search redirect
+        if (!empty($data["s"])) {
+            $s = str_search($data["s"]);
+            echo json_encode(["redirect" => url("/admin/clients/home/{$s}/1")]);
+            return;
+        }
+
+        $search = null;
+        $nfse = (new NfseModel())->find("client_id = :id", "id={$data['client_id']}");
+
+        $all = ($search ?? "all");
+        $pager = new Pager(url("/admin/clients/nfse/{$data['client_id']}/{$all}/"));
+        $pager->pager($nfse->count(), 8, (!empty($data["page"]) ? $data["page"] : 1));
+
+        $head = $this->seo->render(
+            CONF_SITE_NAME . " | Nfse do Cliente",
+            CONF_SITE_DESC,
+            url("/admin"),
+            url("/admin/assets/images/image.jpg"),
+            false
+        );
+
+        echo $this->view->render("widgets/clients/nfseClient", [
+            "app" => "clients/nfseClient",
+            "head" => $head,
+            "nfse" => $nfse->limit($pager->limit())->offset($pager->offset())->fetch(true),
+            "paginator" => $pager->render(),
+            "search" => $search,
+        ]);
+    }
+
+
 
 }

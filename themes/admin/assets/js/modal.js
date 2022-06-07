@@ -1,4 +1,5 @@
 /* Janelas Modais */
+
 function iniciaModal(modalID){
     const modal = document.getElementById(modalID);
     if(modal){
@@ -12,6 +13,22 @@ function iniciaModal(modalID){
 
 }
 
+//envio de notas
+const modalNfseSend = document.querySelectorAll('.modalNfseSend');
+modalNfseSend.forEach((e) => {
+    e.addEventListener('click', function(botao) {
+        var contentID = botao.target.id;
+        document.getElementById('client_id').value = contentID
+        document.querySelector('.invoice_name_client').innerHTML = e.parentNode.parentNode.childNodes[1].innerHTML;
+        document.querySelector('.invoice_cnpj_client').innerHTML = e.parentNode.parentNode.childNodes[3].innerHTML;
+        document.querySelector('.invoice_date_nfse').innerHTML = e.parentNode.parentNode.childNodes[9].innerHTML;
+        iniciaModal("modalNfseSend", contentID);
+
+    });
+});
+
+
+//cancelamento de notas
 const modalNfse = document.querySelectorAll('.modalNfse');
 modalNfse.forEach((e) => {
     e.addEventListener('click', function(botao) {
@@ -25,6 +42,8 @@ modalNfse.forEach((e) => {
     });
 });
 
+
+//Mostrar os erros das notas
 const modalNotification = document.querySelectorAll('.modalNotification');
 const showError = document.querySelector('.showError');
 

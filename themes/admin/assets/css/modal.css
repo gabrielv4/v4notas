@@ -133,6 +133,7 @@
     background-color: #50dd55;
 
 }
+
 .btn-no{
     background-color:#db4437;
     padding: 20px 40px;
@@ -142,6 +143,17 @@
     background-color: #f53625;
 }
 
+.modal-button{
+    color: #fff;
+    border-radius: 8px;
+    border: none;
+    width: 200px;
+    height: 60px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
 
 @keyframes modal{
     from{

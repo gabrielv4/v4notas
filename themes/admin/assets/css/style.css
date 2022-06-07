@@ -1537,7 +1537,13 @@ a.text-dark:focus, a.text-dark:hover {
     border-radius: .25rem;
 }
 
-
+.link_text{
+    font-weight: bold;
+    color: #424093;
+}
+.link_text:hover{
+    color: #cf2b1e;
+}
 
 /*RWD*/
 /*1280w*/

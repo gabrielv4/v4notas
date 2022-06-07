@@ -65,7 +65,7 @@ class Dash extends Auth
             CONF_SITE_NAME . " | Admin",
             CONF_SITE_DESC,
             url("/nfse"),
-            theme("/images/image.jpg", CONF_VIEW_FUNCTIONARY),
+            theme("/images/image.jpg", CONF_VIEW_ADMIN),
             false
         );
 

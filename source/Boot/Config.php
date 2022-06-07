@@ -23,6 +23,7 @@ define("CONF_DB_NAME", "v4notas");
 /**
  * PROJECT URLs
  */
+//ATENÇÂO: Lembre-se de mudar o data-url no status no arquivo areaClient.php
 define("CONF_URL_BASE", "https://www.fkb_valvulas.com.br");
 define("CONF_URL_TEST", "https://www.localhost/TRABALHO/v4notas");
 

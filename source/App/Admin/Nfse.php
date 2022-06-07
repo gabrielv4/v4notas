@@ -5,6 +5,7 @@ namespace Source\App\Admin;
 use Source\Models\Admin;
 use Source\Models\Client;
 use Source\Services\NfseSend;
+use Source\Models\Nfse as NfseModel;
 
 
 class Nfse extends  Admin
@@ -12,7 +13,7 @@ class Nfse extends  Admin
     /**
      * @param array $data
      */
-    public function createNfse(array $data)
+    public function createNfse(?array $data)
     {
         if (empty($data['client_id']) || !$order = (new Client())->findById($data['client_id'])) {
             $this->message->title("Erro de pedido")->warning("O pedido não foi encontrado, favor atualizar a pagina e tentar novamente")->flash();
@@ -27,16 +28,21 @@ class Nfse extends  Admin
         }
 
         $nfe = (new NfseSend())->setOrder($order);
-
+        $nfe->service($data['service']);
         if (!$nfe->sendNfSe()) {
             $this->message->title("Processando NFSe")->error("Erro ao cadastrar a nota verifique os dados")->flash();
             redirect('/admin/dash/home');
             return;
         }
 
-        $this->message->title("Processando NFSe")->success("A nota foi trasmitida e está sendo processada.")->flash();
-        redirect('/admin/dash/home');
+        $this->message->title("Processando NFSe")->success("Nota enviada com sucesso")->flash();
+        $json["redirect"] = url("/admin/dash/home");
+
+        echo json_encode($json);
+        return;
     }
+
+
 
    public function deleteNfse(array $data)
    {
@@ -57,8 +63,6 @@ class Nfse extends  Admin
        return;
 
    }
-
-
 
 
 

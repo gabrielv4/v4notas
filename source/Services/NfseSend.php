@@ -55,6 +55,11 @@ class NfseSend
     protected $message;
 
     /**
+     * @var
+     */
+    protected $service;
+
+    /**
      * NfseSend constructor.
      */
     public function __construct()
@@ -81,6 +86,11 @@ class NfseSend
     public function response()
     {
         return $this->response;
+    }
+
+    public function service(string $text = null): string
+    {
+        return $this->service = $text;
     }
 
     /**
@@ -176,7 +186,7 @@ class NfseSend
                 "aliquota" => "4",
                 "iss_retido" => "false",
                 "item_lista_servico" => "0107",
-                "discriminacao" => "Serviços prestados"
+                "discriminacao" => $this->service == null ? "Serviços prestados" : $this->service
             )
         ];
 
