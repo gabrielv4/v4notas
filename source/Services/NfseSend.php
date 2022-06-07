@@ -224,6 +224,7 @@ class NfseSend
             if (!empty($this->response->status) && $this->response->status == 'autorizado') {
                 $this->nfse->link = $this->response->url_danfse;
                 $this->nfse->status = $this->response->status;
+                $this->nfse->invoice_number = $this->response->numero;
                 $this->nfse->send_at = date_fmt_app();
                 return $this->nfse->save();
 
