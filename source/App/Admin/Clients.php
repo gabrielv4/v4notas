@@ -3,6 +3,7 @@
 namespace Source\App\Admin;
 
 use Source\Models\Client;
+use Source\Models\Nfse;
 use Source\Models\Nfse as NfseModel;
 use Source\Support\Pager;
 
@@ -237,9 +238,22 @@ class Clients extends Auth
         $search = null;
         $nfse = (new NfseModel())->find("client_id = :id", "id={$data['client_id']}");
 
+        if (!empty($data["search"]) && str_search($data["search"]) != "all") {
+            $search = str_search($data["search"]);
+
+            $nfse = (new Nfse())->find("(invoice_number OR name_client LIKE '%' :s '%')", "s={$search}");
+
+            if (!$nfse->count()) {
+                $this->message->info("Sua pesquisa não retornou resultados")->flash();
+                redirect("/admin/dash/home");
+            }
+        }
+
         $all = ($search ?? "all");
         $pager = new Pager(url("/admin/clients/nfse/{$data['client_id']}/{$all}/"));
         $pager->pager($nfse->count(), 8, (!empty($data["page"]) ? $data["page"] : 1));
+
+
 
         $head = $this->seo->render(
             CONF_SITE_NAME . " | Nfse do Cliente",
