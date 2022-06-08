@@ -243,6 +243,7 @@ class Clients extends Auth
 
             $nfse = (new Nfse())->find("(invoice_number OR name_client LIKE '%' :s '%')", "s={$search}");
 
+
             if (!$nfse->count()) {
                 $this->message->info("Sua pesquisa não retornou resultados")->flash();
                 redirect("/admin/dash/home");

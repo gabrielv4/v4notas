@@ -48,7 +48,7 @@ class Dash extends Auth
         if (!empty($data["search"]) && str_search($data["search"]) != "all") {
             $search = str_search($data["search"]);
 
-            $nfse = (new Nfse())->find("(invoice_number OR name_client LIKE '%' :s '%')", "s={$search}");
+            $nfse = (new Nfse())->find("(invoice_number LIKE :s OR name_client LIKE :s )", "s={$search}");
 
             if (!$nfse->count()) {
                 $this->message->info("Sua pesquisa não retornou resultados")->flash();

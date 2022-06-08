@@ -23,6 +23,7 @@
                             <th>Cliente</th>
                             <th>CNPJ</th>
                             <th>Status</th>
+                            <th>Nº NFSe</th>
                             <th>Nota</th>
                             <th>Data de Envio</th>
                             <th>Cancelar</th>
@@ -40,7 +41,7 @@
                                             ($invoice->status == 'erro_autorizacao' ? "<a id='$invoice->id' class='mt-2 text-danger modalNotification linkNotification' data-error='$invoice->error' href='#' ><i class='bi bi-x-lg'></i> <b>Erro ao emitir NFSe</b></a>" :
                                                 ($invoice->status == 'cancelada' ? "<b class='mt-2 d-block text-warning'><i class='bi bi-exclamation-triangle-fill'></i> Nota cancelada</b>" : "<b class='mt-2 d-block text-warning'>Nota Fiscal Pendente</b>")))?>
                                 </td>
-
+                                <td><?=$invoice->invoice_number?></td>
                                 <td><a class="btn btn-default" <?=$invoice->link == '' ? "style='pointer-events: none;'" : ''?> href="<?=$invoice->link?>" target="_blank"> Nota</a></td>
                                 <td><?= date_fmt($invoice->send_at) ?></td>
                                 <td> <a class="icon-trash-o btn btn-red <?=($invoice->status == 'erro_autorizacao' or $invoice->status == 'cancelada') ? '' : 'modalNfse'?>"  id="<?=$invoice->invoice_code?>">Cancelar</a></td>

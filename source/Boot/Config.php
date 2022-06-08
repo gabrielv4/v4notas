@@ -46,7 +46,7 @@ define("CONF_NFSE_TOKEN", 'QAWTWpN0SQgSxkbbU7iaa8AiFv6MNSgW');
 define("CONF_NFSE_CALLBACK", CONF_URL_TEST . "/pay/nfse");
 define("CONF_NFSE_COMPANY", [
     "cnpj" => "40151836000101",
-    "inscricao_municipal" => "15953",
+    "inscricao_municipal" => "4423",
     "codigo_municipio" => "3503901"
 ]);
 define("CONF_COMPANY_CNPJ","40.151.836/0001-01");
