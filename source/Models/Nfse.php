@@ -89,7 +89,7 @@ class Nfse extends Model
      * @param string $columns
      * @return null|mixed|Model
      */
-    public function findByLasClient(int $id, string $columns = "*"): ?array
+    public function findByLastlient(int $id, string $columns = "*"): ?array
     {
         $find = $this->find("client_id = :id", "id={$id}", $columns)->order("send_at DESC")->limit(1);
         return $find->fetch(true);

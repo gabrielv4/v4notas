@@ -143,6 +143,14 @@ function str_price(?string $price): string
 }
 
 /**
+ * @param string $price
+ * @return string
+ */
+function str_price_back(?string $price): string
+{
+    return str_replace(",",".",$price);
+}
+/**
  * @param string|null $search
  * @return string
  */

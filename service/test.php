@@ -1,13 +1,13 @@
 <?php
 //
 //$server = "https://homologacao.focusnfe.com.br";
-//// Substituir pela sua identificação interna da nota
-//$ref = "MjAyMi0wNi0wMSAwOTo0NzoyNQ==";
-//$login = "QAWTWpN0SQgSxkbbU7iaa8AiFv6MNSgW";
+////// Substituir pela sua identificação interna da nota
+//$ref = "112408062022";
+//$login = "R8KyuKBpKBC4HG9ONmEs9yfOnXSZm5Ea";
 //$password = "";
 //$email = array (
 //    "emails" => array(
-//        "gabrielgomess@hotmail.com"
+//        "gabrielgomessdasilva13@gmail.com"
 //    )
 //);
 //// Inicia o processo de envio das informações usando o cURL
@@ -27,15 +27,16 @@
 //print("");
 //curl_close($ch);
 
+
     //Buscar por NFSE
     //Você deve definir isso globalmente para sua aplicação
     //Substituir pela sua identificação interna da nota
-    $ref = "210507062022";
-    $login = "R8KyuKBpKBC4HG9ONmEs9yfOnXSZm5Ea";
+    $ref = "165108062022";
+    $login = "59jOIZxVUSjC1eqkwrt4SXeWIyjgzCtF";
     $password = "";
     // Para ambiente de produção use a variável abaixo:
     // $server = "https://api.focusnfe.com.br";
-    $server = "https://homologacao.focusnfe.com.br"; // Servidor de homologação
+    $server = "https://api.focusnfe.com.br"; // Servidor de homologação
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $server . "/v2/nfse/" . $ref);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -55,21 +56,21 @@
 
 //// Você deve definir isso globalmente para sua aplicação
 //// Para ambiente de produção use a variável abaixo:
-// $server = "https://api.focusnfe.com.br";
-//$server = "https://homologacao.focusnfe.com.br";
+//$server = "https://api.focusnfe.com.br";
 //// Substituir pela sua identificação interna da nota
-//$ref = "210507062022";
-//$login = "R8KyuKBpKBC4HG9ONmEs9yfOnXSZm5Ea";
+////3503901
+//$ref = "165108062022";
+//$login = "59jOIZxVUSjC1eqkwrt4SXeWIyjgzCtF";
 //$password = "";
 //$nfse = array(
-//    "data_emissao" => "2012-06-07T17:43:14-3:00",
+//    "data_emissao" => "2022-06-08T17:43:14-3:00",
 //    "incentivador_cultural" => "false",
 //    "natureza_operacao" => "1",
 //    "optante_simples_nacional" => "false",
 //    "prestador" => array(
 //        "cnpj" => "36705357000112",
-//        "inscricao_municipal" => "15953",
-//        "codigo_municipio" => "3503901"
+//        "inscricao_municipal" => "15954",
+//        "codigo_municipio" => "3546801"
 //    ),
 //    "tomador" => array(
 //        "cnpj" => "07504505000132",
@@ -107,5 +108,33 @@
 ////interpretar e lidar com o retorno
 //print($http_code . "\n");
 //print($body . "\n\n");
+//print("");
+//curl_close($ch);
+
+
+//Cancelamento
+
+//// Você deve definir isso globalmente para sua aplicação
+//$ch = curl_init();
+//// Substituir pela sua identificação interna da nota
+//$ref   = "165108062022";
+//// Para ambiente de produção use a variável abaixo:
+//// $server = "https://api.focusnfe.com.br";
+//$server = "https://api.focusnfe.com.br";
+//$justificativa = array ("justificativa" => "Erro nas informações passadas");
+//$login = "59jOIZxVUSjC1eqkwrt4SXeWIyjgzCtF";
+//$password = "";
+//curl_setopt($ch, CURLOPT_URL, $server . "/v2/nfse/" . $ref);
+//curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+//curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($justificativa));
+//curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+//curl_setopt($ch, CURLOPT_USERPWD, "$login:$password");
+//$body = curl_exec($ch);
+//$result = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+////as três linhas abaixo imprimem as informações retornadas pela API, aqui o seu sistema deverá
+////interpretar e lidar com o retorno
+//print($result."\n");
+//print($body."\n\n");
 //print("");
 //curl_close($ch);

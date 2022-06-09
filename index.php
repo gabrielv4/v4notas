@@ -58,6 +58,7 @@ $route->post("/admins/areaAdmin/{admin_id}", "Admins:areaAdmin");
 $route->get("/admins/home/{search}/{page}", "Admins:home");
 
 //Admin -> Clients
+
 $route->get("/clients/home", "Clients:home");
 $route->post("/clients/home", "Clients:home");
 
@@ -70,14 +71,22 @@ $route->post("/clients/areaClient", "Clients:areaClient");
 $route->get("/clients/areaClient/{client_id}", "Clients:areaClient");
 $route->post("/clients/areaClient/{client_id}", "Clients:areaClient");
 
+
+
 $route->get("/clients/home/{search}/{page}", "Clients:home");
 
 $route->get("/clients/status/{client_id}/{status}", "Clients:settingStatusCompany");
 $route->post("/clients/status/{client_id}/{status}", "Clients:settingStatusCompany");
 
+
+
+
 $route->get("/clients/nfse/{client_id}", "Clients:nfseClient");
 $route->post("/clients/nfse/{client_id}", "Clients:nfseClient");
+
 $route->get("/clients/nfse/{client_id}/{search}/{page}", "Clients:nfseClient");
+
+
 
 // Setting-> admin photo
 $route->get("/settings/photo", "Settings:photo");
@@ -90,16 +99,28 @@ $route->post("/settings/updateAccount/{admin_id}", "Settings:updateAccount");
 
 
 
+
+
 // Admin -> Admin Invoice
+$route->get("/clientFind/{client_id}", "Clients:findClient");
+$route->post("/nfseFind/{invoice_code}", "Nfse:findNfse");
+$route->post("/nfseError/{invoice_code}", "Nfse:errorNfse");
+
 
 $route->get("/nfse/add", "Nfse:createNfse");
 $route->post("/nfse/add", "Nfse:createNfse");
 
 
 
+
 $route->get("/nfse/cancelamento", "Nfse:deleteNfse");
 $route->post("/nfse/cancelamento", "Nfse:deleteNfse");
 
+
+
+
+
+$route->post("/pay/nfse", "Nfse:returnNfse");
 
 /**
  * ERROR ROUTES

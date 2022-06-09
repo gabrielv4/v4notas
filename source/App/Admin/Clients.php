@@ -24,7 +24,7 @@ class Clients extends Auth
 
         if (!empty($data["search"]) && str_search($data["search"]) != "all") {
             $search = str_search($data["search"]);
-            $clients = (new Client())->find("MATCH(company_name) AGAINST(:s)", "s={$search}");
+            $clients = (new Client())->find("(company_name LIKE '%' :s '%')", "s={$search}");
             if (!$clients->count()) {
                 $this->message->info("Sua pesquisa não retornou resultados")->flash();
                 redirect("/admin/clients/home");
@@ -241,7 +241,7 @@ class Clients extends Auth
         if (!empty($data["search"]) && str_search($data["search"]) != "all") {
             $search = str_search($data["search"]);
 
-            $nfse = (new Nfse())->find("(invoice_number OR name_client LIKE '%' :s '%')", "s={$search}");
+            $nfse = (new Nfse())->find("(invoice_number LIKE '%' :s '%' OR name_client LIKE '%' :s '%' )", "s={$search}");
 
 
             if (!$nfse->count()) {
@@ -264,7 +264,7 @@ class Clients extends Auth
             false
         );
 
-        echo $this->view->render("widgets/clients/nfseClient", [
+        echo $this->view->render("widgets/dash/home", [
             "app" => "clients/nfseClient",
             "head" => $head,
             "nfse" => $nfse->limit($pager->limit())->offset($pager->offset())->fetch(true),
@@ -272,6 +272,21 @@ class Clients extends Auth
             "search" => $search,
         ]);
     }
+
+
+    public function findClient(array $data)
+    {
+        $client = (new Client())->find("id = :id", "id={$data['client_id']}")->limit(1)->fetch();
+
+        $template = '<p><strong>Nome: </strong> <span>'.$client->company_name.'</span></p>
+                    <p><strong>CNPJ: </strong> <span>'.$client->cnpj.'</span></p>
+                    <p><strong>Status: </strong> <span>'.$client->status.'</span></p>
+                   
+                    ';
+
+        echo $template;
+    }
+
 
 
 

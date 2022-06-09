@@ -358,6 +358,8 @@ function updateProgressbar() {
     progress.style.width =
         ((progressActive.length - 1) / (progressSteps.length - 1)) * 100 + "%";
 }
+
+
 // Colocando o CEP
 function getCep(a) {
     if (a.length) {

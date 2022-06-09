@@ -58,6 +58,8 @@ class NfseSend
      * @var
      */
     protected $service;
+    protected $dateInvoice;
+    protected $valueInvoice;
 
     /**
      * NfseSend constructor.
@@ -88,9 +90,22 @@ class NfseSend
         return $this->response;
     }
 
-    public function service(string $text = null): string
+    public function service(string $text): string
     {
-        return $this->service = $text;
+         return $this->service = $text;
+
+    }
+
+    public function dateNfse(string $text): string
+    {
+        return $this->dateInvoice = $text;
+
+    }
+
+    public function valueNfse(string $text): string
+    {
+        return $this->valueInvoice = $text;
+
     }
 
     /**
@@ -162,7 +177,7 @@ class NfseSend
 
         $this->endpoint = "/v2/nfse?ref=" . $this->codeAccess;
         $this->fields = [
-            "data_emissao" => date_fmt_app(),
+            "data_emissao" => $this->dateInvoice == null ? date_fmt_app() : $this->dateInvoice,
             "incentivador_cultural" => "false",
             "natureza_operacao" => "1",
             "optante_simples_nacional" => "true",
@@ -173,7 +188,7 @@ class NfseSend
                 "razao_social" => $this->order->company_name,
                 "email" => $this->order->email_stakeholder,
                 "endereco" => array(
-                    "codigo_municipio" => "4106902",
+                    "codigo_municipio" => CONF_NFSE_COMPANY['codigo_municipio'],
                     "bairro" => $this->order->district,
                     "cep" => $this->order->cep,
                     "logradouro" => $this->order->complement,
@@ -182,7 +197,7 @@ class NfseSend
                 )
             ),
             "servico" => array(
-                "valor_servicos" => $this->order->fee_value,
+                "valor_servicos" => $this->valueInvoice == null ? $this->order->fee_value : $this->valueInvoice,
                 "aliquota" => "4",
                 "iss_retido" => "false",
                 "item_lista_servico" => "0107",

@@ -38,14 +38,14 @@
                                 <td>
                                     <?=$invoice->status == 'autorizado' ? "<b class='mt-2 text-success d-block' ><i class='bi bi-check-lg'></i> Nota Fiscal Emitida</b>" :
                                         ($invoice->status == 'processando_autorizacao' ? "<b class='mt-2 d-block text-info'><i class='bi bi-arrow-clockwise'></i> Processando NFSe</b>" :
-                                            ($invoice->status == 'erro_autorizacao' ? "<a id='$invoice->id' class='mt-2 text-danger modalNotification linkNotification' data-error='$invoice->error' href='#' ><i class='bi bi-x-lg'></i> <b>Erro ao emitir NFSe</b></a>" :
+                                            ($invoice->status == 'erro_autorizacao' ? "<a id='$invoice->id' class='mt-2 text-danger modalNotification linkNotification viewDataError'  href='#' data-url=".CONF_URL_TEST." ><i class='bi bi-x-lg'></i> <b>Erro ao emitir NFSe</b></a>" :
                                                 ($invoice->status == 'cancelada' ? "<b class='mt-2 d-block text-warning'><i class='bi bi-exclamation-triangle-fill'></i> Nota cancelada</b>" : "<b class='mt-2 d-block text-warning'>Nota Fiscal Pendente</b>")))?>
                                 </td>
-                                <td><?=$invoice->invoice_number?></td>
+                                <td><?=$invoice->invoice_number == null ? '---x---' : $invoice->invoice_number?></td>
 
                                 <td><a class="btn btn-default" <?=$invoice->link == '' ? "style='pointer-events: none;'" : ''?> href="<?=$invoice->link?>" target="_blank"> Nota</a></td>
                                 <td><?= date_fmt($invoice->send_at) ?></td>
-                                <td> <a class="icon-trash-o btn btn-red <?=($invoice->status == 'erro_autorizacao' or $invoice->status == 'cancelada') ? '' : 'modalNfse'?>"  id="<?=$invoice->invoice_code?>">Cancelar</a></td>
+                                <td> <a class="icon-trash-o btn btn-red <?=($invoice->status == 'erro_autorizacao' or $invoice->status == 'cancelada') ? '' : 'viewData'?>" data-url="<?=CONF_URL_TEST?>"  id="<?=$invoice->invoice_code?>">Cancelar</a></td>
                             </tr>
 
                         <?php endforeach; ?>
@@ -68,10 +68,8 @@
         <button class="fechar">X</button>
         <h2 class="subtitulo">Cancelamento de Nota</h2>
         <br>
-        <div class="content-info">
-            <p><strong>Nome: </strong> <span class="invoice_name_client"></span></p>
-            <p><strong>CNPJ: </strong> <span class="invoice_cnpj_client"></span></p>
-            <p><strong>Emissão: </strong> <span class="invoice_date_nfse"></span></p>
+        <div class="content-info" id="templeteModal">
+
         </div>
         <br>
         <form action="<?=url('/admin/nfse/cancelamento')?>" method="POST" enctype="multipart/form-data">

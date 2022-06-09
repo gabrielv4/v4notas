@@ -17,7 +17,7 @@ use Source\Services\NfseSend;
             //listar esses clientes
             foreach ($client as $item) {
                 //pegando as nfse dos clientes
-                $nfse = (new Nfse())->findByLasClient($item->id);
+                $nfse = (new Nfse())->findByLastlient($item->id);
 
                     //pegando as nfse que existem dos clientes
                     if(!empty($nfse)){

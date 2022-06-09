@@ -41,15 +41,20 @@
     text-align: center;
     margin-bottom: 10px;
 }
-.modal-container input[type="text"]{
-    width: 80%;
+.modal-container input[type="text"],
+.modal-container input[type="date"],
+.modal-container input[type="password"],
+.modal-container input[type="email"]
+{
+    width: 100%;
     margin-bottom: 10px;
     margin-top: 10px;
-    height: 30px;
+    height: 32px;
     padding-left: 10px;
     border-radius: 8px;
     border: 1px solid #26353e;
     outline: none;
+    font-size: 16px;
 }
 .modal-container input[type="submit"]{
     margin-left: 40%;

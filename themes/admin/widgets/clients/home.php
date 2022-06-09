@@ -16,12 +16,14 @@
 
                     <div class="message info icon-info">Ainda não existem clientes cadastrados.</div>
                 <?php else : ?>
+
                     <table class="table">
                         <tr>
                             <thead>
                             <th>Empresa</th>
                             <th>StakeHolder</th>
-                            <th>Email</th>
+
+                            <th>CNPJ</th>
                             <th>Acessor</th>
                             <th>Status</th>
                             <th>Editar</th>
@@ -35,7 +37,8 @@
 
                                 <td><a class="link_text" href="<?=url('/admin/clients/nfse/'.$client->id)?>"><?= $client->company_name ?></a></td>
                                 <td><?= $client->name_stakeholder ?></td>
-                                <td><?= $client->email_stakeholder?></td>
+
+                                <td><?=$client->cnpj?></td>
                                 <td><?= $client->advisor ?></td>
                                 <td class="<?= $client->status == 'ativo' ? 'ativo' : 'desativo'?>"><?= $client->status?></td>
 
@@ -46,7 +49,8 @@
                                         data-action="delete"
                                         data-confirm="Tem certeza que deseja deletar esse cliente?"
                                         data-client_id="<?= $client->id; ?>">Deletar</a></td>
-                                <td><a class="icon-folder btn btn-default modalNfseSend" id="<?=$client->id?>" href="#">Nota</a></td>
+
+                                <td><a class="icon-folder btn btn-default viewDataClient" data-url="<?=CONF_URL_TEST?>" id="<?=$client->id?>" href="#">Nota</a></td>
 
                             </tr>
                         <?php endforeach; ?>
@@ -67,19 +71,19 @@
         <button class="fechar">X</button>
         <h2 class="subtitulo">Enviar de Nota</h2>
         <br>
-        <div class="content-info">
-            <p><strong>Nome: </strong> <span class="invoice_name_client"></span></p>
-            <p><strong>CNPJ: </strong> <span class="invoice_cnpj_client"></span></p>
-            <p><strong>Emissão: </strong> <span class="invoice_date_nfse"></span></p>
+        <div class="content-info" id="templeteModal">
+
         </div>
         <br>
         <form action="<?=url('/admin/nfse/add')?>" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="client_id" id="client_id" >
+            <input type="hidden" name="client_id" id="client_id"/>
             <fieldset class="form-model">
+                <input type="text" name="invoice_value" placeholder="Digite o valor da nota"/>
+                <input type="date" name="invoice_date" value="<?=date('Y-m-d')?>"/>
                 <textarea name="service" required id="service" placeholder="Informações sobre o serviço prestado" class="textarea-model"></textarea>
             </fieldset>
             <fieldset class="fieldset_model">
-                <button class="modal-button btn-yes">Confirmar Envio</button>
+                <button class="modal-button btn-yes" id="modal-button">Confirmar Envio</button>
             </fieldset>
         </form>
     </div>

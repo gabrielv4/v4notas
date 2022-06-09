@@ -20,10 +20,15 @@ define("CONF_DB_USER", "root");
 define("CONF_DB_PASS", "");
 define("CONF_DB_NAME", "v4notas");
 
+
+
 /**
  * PROJECT URLs
  */
-//ATENÇÂO: Lembre-se de mudar o data-url no status no arquivo areaClient.php
+//ATENÇÂO: Lembre-se de mudar o data-url no status nos arquivos
+// clients/areaClient.php
+// clients/home.php
+//dash/home.php
 define("CONF_URL_BASE", "https://www.fkb_valvulas.com.br");
 define("CONF_URL_TEST", "https://www.localhost/TRABALHO/v4notas");
 
@@ -41,15 +46,15 @@ define("CONF_SITE_LANG", "pt_BR");
  */
 
 define("CONF_NFSE_HOST", 'https://homologacao.focusnfe.com.br');
-define("CONF_NFSE_TOKEN", 'QAWTWpN0SQgSxkbbU7iaa8AiFv6MNSgW');
+define("CONF_NFSE_TOKEN", 'R8KyuKBpKBC4HG9ONmEs9yfOnXSZm5Ea');
 //define("CONF_NFSE_CALLBACK", CONF_URL_BASE . "/pay/nfse");
 define("CONF_NFSE_CALLBACK", CONF_URL_TEST . "/pay/nfse");
 define("CONF_NFSE_COMPANY", [
-    "cnpj" => "40151836000101",
-    "inscricao_municipal" => "4423",
+    "cnpj" => "36705357000112",
+    "inscricao_municipal" => "15953",
     "codigo_municipio" => "3503901"
 ]);
-define("CONF_COMPANY_CNPJ","40.151.836/0001-01");
+define("CONF_COMPANY_CNPJ","36.705.357/0001-12");
 
 /**
  * Information Address
