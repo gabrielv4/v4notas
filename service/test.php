@@ -1,5 +1,5 @@
 <?php
-//
+////
 //$server = "https://homologacao.focusnfe.com.br";
 ////// Substituir pela sua identificação interna da nota
 //$ref = "112408062022";
@@ -31,12 +31,14 @@
     //Buscar por NFSE
     //Você deve definir isso globalmente para sua aplicação
     //Substituir pela sua identificação interna da nota
-    $ref = "165108062022";
-    $login = "59jOIZxVUSjC1eqkwrt4SXeWIyjgzCtF";
+
+
+    $ref = "MjAyMi0wNi0wOSAyMjoxNTo0NQ==";
+    $login = "R8KyuKBpKBC4HG9ONmEs9yfOnXSZm5Ea";
     $password = "";
     // Para ambiente de produção use a variável abaixo:
     // $server = "https://api.focusnfe.com.br";
-    $server = "https://api.focusnfe.com.br"; // Servidor de homologação
+    $server = "https://homologacao.focusnfe.com.br"; // Servidor de homologação
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $server . "/v2/nfse/" . $ref);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -56,21 +58,22 @@
 
 //// Você deve definir isso globalmente para sua aplicação
 //// Para ambiente de produção use a variável abaixo:
-//$server = "https://api.focusnfe.com.br";
+
 //// Substituir pela sua identificação interna da nota
 ////3503901
-//$ref = "165108062022";
+//$server = "https://api.focusnfe.com.br";
+//$ref = "124009062022";
 //$login = "59jOIZxVUSjC1eqkwrt4SXeWIyjgzCtF";
 //$password = "";
 //$nfse = array(
-//    "data_emissao" => "2022-06-08T17:43:14-3:00",
+//    "data_emissao" => "2022-06-09T17:43:14-3:00",
 //    "incentivador_cultural" => "false",
 //    "natureza_operacao" => "1",
 //    "optante_simples_nacional" => "false",
 //    "prestador" => array(
 //        "cnpj" => "36705357000112",
 //        "inscricao_municipal" => "15954",
-//        "codigo_municipio" => "3546801"
+//        "codigo_municipio" => "3503901"
 //    ),
 //    "tomador" => array(
 //        "cnpj" => "07504505000132",
@@ -114,14 +117,14 @@
 
 //Cancelamento
 
-//// Você deve definir isso globalmente para sua aplicação
+// Você deve definir isso globalmente para sua aplicação
 //$ch = curl_init();
 //// Substituir pela sua identificação interna da nota
-//$ref   = "165108062022";
+//$ref   = "124709062022";
 //// Para ambiente de produção use a variável abaixo:
 //// $server = "https://api.focusnfe.com.br";
 //$server = "https://api.focusnfe.com.br";
-//$justificativa = array ("justificativa" => "Erro nas informações passadas");
+//$justificativa = array ("justificativa" => "Teste de cancelamento de nota");
 //$login = "59jOIZxVUSjC1eqkwrt4SXeWIyjgzCtF";
 //$password = "";
 //curl_setopt($ch, CURLOPT_URL, $server . "/v2/nfse/" . $ref);

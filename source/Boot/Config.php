@@ -15,12 +15,27 @@ define("CONF_FORCE_WWW", 1);
 /**
  * DATABASE
  */
-define("CONF_DB_HOST", "localhost");
-define("CONF_DB_USER", "root");
-define("CONF_DB_PASS", "");
-define("CONF_DB_NAME", "v4notas");
+//define("CONF_DB_HOST", "localhost");
+//define("CONF_DB_USER", "grupodv8_01");
+//define("CONF_DB_PASS", "#Dv8041892");
+//define("CONF_DB_NAME", "grupodv8_v4");
 
+//define("CONF_DB_HOST", "localhost");
+//define("CONF_DB_USER", "root");
+//define("CONF_DB_PASS", "");
+//define("CONF_DB_NAME", "v4notas");
 
+if (CONF_HTTP_HOST == 'www.localhost') {
+    define("CONF_DB_HOST", "localhost");
+    define("CONF_DB_USER", "root");
+    define("CONF_DB_PASS", "");
+    define("CONF_DB_NAME", "v4notas");
+} else {
+    define("CONF_DB_HOST", "localhost");
+    define("CONF_DB_USER", "grupodv8_01");
+    define("CONF_DB_PASS", "#Dv8041892");
+    define("CONF_DB_NAME", "grupodv8_v4");
+}
 
 /**
  * PROJECT URLs
@@ -29,7 +44,7 @@ define("CONF_DB_NAME", "v4notas");
 // clients/areaClient.php
 // clients/home.php
 //dash/home.php
-define("CONF_URL_BASE", "https://www.fkb_valvulas.com.br");
+define("CONF_URL_BASE", "https://www.grupodv8.com.br/v4");
 define("CONF_URL_TEST", "https://www.localhost/TRABALHO/v4notas");
 
 /**
@@ -47,11 +62,13 @@ define("CONF_SITE_LANG", "pt_BR");
 
 define("CONF_NFSE_HOST", 'https://homologacao.focusnfe.com.br');
 define("CONF_NFSE_TOKEN", 'R8KyuKBpKBC4HG9ONmEs9yfOnXSZm5Ea');
+//define("CONF_NFSE_HOST", 'https://api.focusnfe.com.br');
+//define("CONF_NFSE_TOKEN", '59jOIZxVUSjC1eqkwrt4SXeWIyjgzCtF');
 //define("CONF_NFSE_CALLBACK", CONF_URL_BASE . "/pay/nfse");
 define("CONF_NFSE_CALLBACK", CONF_URL_TEST . "/pay/nfse");
 define("CONF_NFSE_COMPANY", [
     "cnpj" => "36705357000112",
-    "inscricao_municipal" => "15953",
+    "inscricao_municipal" => "15954",
     "codigo_municipio" => "3503901"
 ]);
 define("CONF_COMPANY_CNPJ","36.705.357/0001-12");

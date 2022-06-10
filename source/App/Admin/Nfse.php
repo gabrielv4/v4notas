@@ -15,7 +15,7 @@ class Nfse extends  Admin
      */
     public function createNfse(array $data)
     {
-        $invoice = (new NfseModel())->find("client_id = :id", "id={$data['client_id']}")->order("send_at DESC")->limit(1)->fetch();;
+        $invoice = (new NfseModel())->find("client_id = :id", "id={$data['client_id']}")->order("id DESC")->limit(1)->fetch();
 
         if (empty($data['client_id']) || !$client = (new Client())->findById($data['client_id'])) {
             $this->message->title("Erro de pedido")->warning("O pedido não foi encontrado, favor atualizar a pagina e tentar novamente")->flash();
@@ -40,15 +40,14 @@ class Nfse extends  Admin
         }
 
         //verifica se ele possui alguma nota
-        if($invoice){
-            //Se possui verifica se a ultima nota gerada é do mês atual se for ele não gera uma nova
-            if($invoice->status != 'cancelada' && date_fmt_back_month($invoice->send_at) == date('m')){
-                $this->message->warning("O cliente já possui uma nota do mês ". date_fmt_back_month($invoice->send_at))->flash();
-                $json["redirect"] = url("/admin/clients/home");
-                echo json_encode($json);
-                return;
-            }
+        //Se possui verifica se a ultima nota gerada é do mês atual se for ele não gera uma nova
+        if(!empty($invoice) && $invoice->status != 'cancelada' && date_fmt_back_month($invoice->send_at) == date('m')){
+            $this->message->warning("O cliente já possui uma nota do mês ". date_fmt_back_month($invoice->send_at))->flash();
+            $json["redirect"] = url("/admin/clients/home");
+            echo json_encode($json);
+            return;
         }
+
 
 
         $nfe = (new NfseSend())->setOrder($client);
@@ -70,25 +69,25 @@ class Nfse extends  Admin
 
 
 
-   public function deleteNfse(?array $data)
-   {
-       $code = (new NfseModel())->findByCode($data['invoice_code']);
+    public function deleteNfse(?array $data)
+    {
+        $code = (new NfseModel())->findByCode($data['invoice_code']);
 
-       if(empty($code)){
-           $this->message->title("Processando NFSe")->error("A Nfse que você tentou cancelar não existe")->flash();
-           redirect('/admin/dash/home');
-           return;
-       }
+        if(empty($code)){
+            $this->message->title("Processando NFSe")->error("A Nfse que você tentou cancelar não existe")->flash();
+            redirect('/admin/dash/home');
+            return;
+        }
 
-       $nf = (new NfseSend())->setNfse($code);
-       $nf->cancelNfse($data['invoice_code'], $data['justification']);
-       $nf->getinfo();
+        $nf = (new NfseSend())->setNfse($code);
+        $nf->cancelNfse($data['invoice_code'], $data['justification']);
+        $nf->getinfo();
 
-       $this->message->success("Nota cancelada com sucesso!")->flash();
-       echo json_encode(["reload" => true]);
-       return;
+        $this->message->success("Nota cancelada com sucesso!")->flash();
+        echo json_encode(["reload" => true]);
+        return;
 
-   }
+    }
 
     /**
      * @param array $data
@@ -101,19 +100,19 @@ class Nfse extends  Admin
         $errors = (!empty($response->erros) ? $response->erros[0] : null);
 
 
-        $orderId = (int)$response->ref;
-        $order = (new \Source\Models\Nfse())->findById($orderId);
+        $invoiceCode = (int)$response->ref;
+        $order = (new NfseModel())->findByCode($invoiceCode);
 
         if ($response->status == 'autorizado' && $order) {
-            $order->nfe_link = $response->url_danfse;
-            $order->nfe_status = $response->status;
-            $order->nfe_send_at = date_fmt_app();
+            $order->link = $response->url_danfse;
+            $order->status = $response->status;
+            $order->send_at = date_fmt_app();
             $order->save();
         }
 
         if ($response->status == 'erro_autorizacao' && $order) {
-            $order->nfe_status = $response->status;
-            $order->nfe_error = $errors->mensagem;
+            $order->status = $response->status;
+            $order->error = $errors->mensagem;
             $order->save();
         }
     }

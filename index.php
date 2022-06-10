@@ -109,8 +109,7 @@ $route->post("/nfseError/{invoice_code}", "Nfse:errorNfse");
 
 $route->get("/nfse/add", "Nfse:createNfse");
 $route->post("/nfse/add", "Nfse:createNfse");
-
-
+//$route->post("/nfse/", "Nfse:returnNfse");
 
 
 $route->get("/nfse/cancelamento", "Nfse:deleteNfse");
@@ -118,9 +117,6 @@ $route->post("/nfse/cancelamento", "Nfse:deleteNfse");
 
 
 
-
-
-$route->post("/pay/nfse", "Nfse:returnNfse");
 
 /**
  * ERROR ROUTES

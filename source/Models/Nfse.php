@@ -95,6 +95,12 @@ class Nfse extends Model
         return $find->fetch(true);
     }
 
+    public function findByLastInvoiceId(int $id, string $columns = "*"): ?array
+    {
+        $find = $this->find("client_id = :id", "id={$id}", $columns)->order("id DESC")->limit(1);
+        return $find->fetch(true);
+    }
+
 
 
     /**
