@@ -16,9 +16,9 @@
 
                     <div class="progress-step progress-step-active" data-title="Responsaveis"></div>
                     <div class="progress-step" data-title="Empresa"></div>
+                    <div class="progress-step" data-title="Pagamentos"></div>
                     <div class="progress-step" data-title="Enredereço"></div>
                     <div class="progress-step" data-title="Projeto"></div>
-                    <div class="progress-step" data-title="Datas"></div>
                     <div class="progress-step" data-title="Finalizar"></div>
                 </div>
 
@@ -26,7 +26,7 @@
                 <div class="form-step form-step-active">
                     <label class="label">
                         <span class="legend">*Nome StakeHolder:</span>
-                        <input type="text" name="name_stakeholder" id="name_stakeholder" placeholder="Nome da StakeHolder" required />
+                        <input type="text" name="name_stakeholder" id="name_stakeholder" placeholder="Nome do StakeHolder" required />
                     </label>
 
                     <label class="label">
@@ -40,13 +40,13 @@
                     </label>
 
                     <label class="label">
-                        <span class="legend">*Responsavel financeiro:</span>
-                        <input type="text" name="financial_name" id="financial_name" placeholder="Nome do reposnsavel financeiro" required />
+                        <span class="legend">*Responsavel Financeiro:</span>
+                        <input type="text" name="financial_name" id="financial_name" placeholder="Nome do responsavel financeiro" required />
                     </label>
 
                     <label class="label">
                         <span class="legend">*E-mail Responsavel financeiro:</span>
-                        <input type="email" name="financial_email" id="email_financial" placeholder="Email do reposnsavel financeiro" required />
+                        <input type="email" name="financial_email" id="email_financial" placeholder="Email do responsavel financeiro" required />
                     </label>
 
                     <div class="btns-group">
@@ -75,6 +75,45 @@
                     <div class="btns-group">
                         <a href="#" class="btn btn-prev">Anterior</a>
                         <a href="#" class="btn btn-next">Proximo </a>
+                    </div>
+                </div>
+
+
+                <div class="form-step">
+
+                    <label class="label">
+                        <span class="legend">*Primeiro Pagamento:</span>
+                        <input type="date" name="first_payment" id="first_payment" placeholder="Data do primeiro pagamento" required />
+                    </label>
+
+                    <label class="label">
+                        <span class="legend">*Vigencia do Contrato:</span>
+                        <input type="date" name="contract_duration" id="contract_duration" placeholder="Vigencia do Contrato" required />
+                    </label>
+
+                    <label class="label">
+                        <span class="legend">*Dia do pagamento:</span>
+                        <input type="text" name="pay_day" id="pay_day" placeholder="Dia do pagamento" required />
+                    </label>
+
+                    <label class="label">
+                        <span class="legend">*Dia para receber a nota:</span>
+                        <input type="text" name="invoice_day" id="invoice_day" placeholder="Coloque o dia em que o cliente receberá a nota fiscal" required />
+                    </label>
+
+                    <label class="label">
+                        <span class="legend">*Valor do Fee:</span>
+                        <input type="text" name="fee_value" id="fee_value" placeholder="Valor do Fee" required />
+                    </label>
+
+                    <label class="label">
+                        <span class="legend">*Descrição da nota:</span>
+                        <textarea id="invoice_description" placeholder="Coloque aqui a descrição da nota" name="invoice_description"></textarea>
+                    </label>
+
+                    <div class="btns-group">
+                        <a href="#" class="btn btn-prev">Anterior</a>
+                        <a href="#" class="btn btn-next">Proximo</a>
                     </div>
                 </div>
 
@@ -112,7 +151,7 @@
 
                     <label class="label">
                         <span class="legend">*Completomento:</span>
-                        <input type="text" name="complement" class="js-complement" id="company_complement" id="complement" placeholder="Ex. ao lado da escola" required />
+                        <input type="text" name="complement" class="js-complement" id="company_complement" id="complement" placeholder="Ex. ao lado da escola" />
                     </label>
 
                     <div class="btns-group">
@@ -134,7 +173,7 @@
 
                     <label class="label">
                         <span class="legend">*inicio do Projeto :</span>
-                        <input type="date" name="start_project" id="start_project" placeholder="Acessor Responsavel" required />
+                        <input type="date" name="start_project" id="start_project" required />
                     </label>
 
                     <label class="label">
@@ -147,33 +186,7 @@
                     </div>
                 </div>
 
-                <div class="form-step">
 
-                    <label class="label">
-                        <span class="legend">*Primeiro Pagamento:</span>
-                        <input type="date" name="first_payment" id="first_payment" placeholder="Data do primeiro pagamento" required />
-                    </label>
-
-                    <label class="label">
-                        <span class="legend">*Vigencia do Contrato:</span>
-                        <input type="date" name="contract_duration" id="contract_duration" placeholder="Vigencia do Contrato" required />
-                    </label>
-
-                    <label class="label">
-                        <span class="legend">*Dia do pagamento:</span>
-                        <input type="text" name="pay_day" id="pay_day" placeholder="Dia do pagamento" required />
-                    </label>
-
-                    <label class="label">
-                        <span class="legend">*Valor do Fee:</span>
-                        <input type="text" name="fee_value" id="fee_value" placeholder="Valor do Fee" required />
-                    </label>
-
-                    <div class="btns-group">
-                        <a href="#" class="btn btn-prev">Anterior</a>
-                        <a href="#" class="btn btn-next">Proximo</a>
-                    </div>
-                </div>
 
 
                 <div class="form-step ">
@@ -245,7 +258,12 @@
                             <label><b>Primeiro Pagamento: </b> <p class="write_first_payment"></p></label>
                             <label><b>Duração do Contrato: </b> <p class="write_contract_duration"></p></label>
                             <label><b>Dia do Pagamento: </b> <p class="write_pay_day"></p></label>
+                        </div>
+
+                        <div class="data_form">
+                            <label><b>Dia do para receber a nota: </b> <p class="write_invoice_day"></p></label>
                             <label><b>Valor do Fee: </b> <p class="write_fee_value"></p></label>
+                            <label><b>Descrição da nota: </b> <p class="write_invoice_description"></p></label>
                         </div>
                     </div>
 
@@ -301,18 +319,18 @@
 
                     <label class="label">
                         <span class="legend">*Responsavel financeiro:</span>
-                        <input type="text" name="financial_name" value="<?=$client->financial_name?>" id="financial_name" placeholder="Nome do reposnsavel financeiro" required />
+                        <input type="text" name="financial_name" value="<?=$client->financial_name?>" id="financial_name" placeholder="Nome do responsavel financeiro" required />
                     </label>
 
                     <label class="label">
                         <span class="legend">*E-mail Responsavel financeiro:</span>
-                        <input type="email" name="financial_email" value="<?=$client->financial_email?>" id="email_financial" placeholder="Email do reposnsavel financeiro" required />
+                        <input type="email" name="financial_email" value="<?=$client->financial_email?>" id="email_financial" placeholder="Email do responsavel financeiro" required />
                     </label>
 
                     <label class="label">
                         <span class="legend">*Status:</span>
                         <label class="switch switch-danger">
-                            <input id="switch1" data-id="<?=$client->id?>" data-url="<?=CONF_URL_TEST?>" class="status" <?=$client->status == 'ativo' ? 'checked' : ''?> type="checkbox" />
+                            <input id="switch1" data-id="<?=$client->id?>" data-url="<?=url()?>" class="status" <?=$client->status == 'ativo' ? 'checked' : ''?> type="checkbox" />
                             <span class="switch-slider"></span>
                         </label>
                     </label>
@@ -380,7 +398,7 @@
 
                     <label class="label">
                         <span class="legend">*Completomento:</span>
-                        <input type="text" value="<?=$client->complement?>" name="complement" class="js-complement" id="company_complement" id="complement" placeholder="Ex. ao lado da escola" required />
+                        <input type="text" value="<?=$client->complement?>" name="complement" class="js-complement" id="company_complement" id="complement" placeholder="Ex. ao lado da escola"  />
                     </label>
 
                     <div class="btns-group">
@@ -395,8 +413,8 @@
                     </label>
 
                     <label class="label">
-                        <span class="legend">*Acessor reponsavel:</span>
-                        <input type="text" name="advisor" value="<?=$client->advisor?>" id="advisor" placeholder="Acessor Responsavel" required />
+                        <span class="legend">*Assessor responsavel:</span>
+                        <input type="text" name="advisor" value="<?=$client->advisor?>" id="advisor" placeholder="Assessor responsavel" required />
                     </label>
 
                     <label class="label">

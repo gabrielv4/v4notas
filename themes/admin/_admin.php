@@ -8,8 +8,10 @@
 
     <link rel="stylesheet" href="<?= url("/shared/styles/boot.css"); ?>"/>
     <link rel="stylesheet" href="<?= url("/shared/styles/styles.css"); ?>"/>
+    <link rel="stylesheet" href="<?= theme("/assets/css/dataView.css", CONF_VIEW_ADMIN); ?>"/>
     <link rel="stylesheet" href="<?= theme("/assets/css/style.css", CONF_VIEW_ADMIN); ?>"/>
     <link rel="stylesheet" href="<?= theme("/assets/css/modal.css", CONF_VIEW_ADMIN); ?>"/>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
     <link rel="icon" type="image/png" href="<?= theme("/assets/images/favicon.png", CONF_VIEW_ADMIN); ?>"/>
@@ -72,7 +74,30 @@
             <?= $v->section("content"); ?>
         </div>
     </section>
+
+
+
 </div>
+
+<!--Mostrar os dados do cliente-->
+<div class="customDataView ">
+
+    <nav class="navDataView showDataView">
+        <div class="infoDataView">
+            <div class="imgDataView"><img src="<?=theme("/assets/images/icone_empresa.png", CONF_VIEW_ADMIN)?>" alt=""></div>
+            <div class="closeDataView">X</div>
+
+            <div id="templateDataView"></div>
+
+
+
+        </div>
+    </nav>
+
+</div>
+
+
+
 
 <script src="<?= url("/shared/scripts/jquery.min.js"); ?>"></script>
 <script src="<?= url("/shared/scripts/jquery.form.js"); ?>"></script>
@@ -82,6 +107,7 @@
 <script src="<?= theme("/assets/js/scripts.js", CONF_VIEW_ADMIN); ?>"></script>
 <script src="<?= theme("/assets/js/base.js", CONF_VIEW_ADMIN); ?>"></script>
 <script src="<?= theme("/assets/js/modal.js", CONF_VIEW_ADMIN); ?>"></script>
+<script src="<?= theme("/assets/js/dataView.js", CONF_VIEW_ADMIN); ?>"></script>
 
 <?= $v->section("scripts"); ?>
 

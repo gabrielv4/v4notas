@@ -44,6 +44,7 @@ class Dash extends Auth
 
         $search = null;
         $nfse = (new Nfse())->find();
+        $clients = (new Client())->find();
 
         if (!empty($data["search"]) && str_search($data["search"]) != "all") {
             $search = str_search($data["search"]);
@@ -73,6 +74,7 @@ class Dash extends Auth
             "app" => "dash",
             "head" => $head,
             "nfse" => $nfse->limit($pager->limit())->offset($pager->offset())->order("id DESC")->fetch(true),
+            "clients" => $clients->order('id DESC')->fetch(true),
             "paginator" => $pager->render(),
             "search" => $search,
 

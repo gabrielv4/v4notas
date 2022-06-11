@@ -20,38 +20,35 @@
                     <table class="table">
                         <tr>
                             <thead>
-                            <th>Empresa</th>
+                            <th>Nome do Projeto</th>
                             <th>StakeHolder</th>
 
-                            <th>CNPJ</th>
-                            <th>Acessor</th>
+                            <th>Dia do Pagamento</th>
+                            <th>Assessor</th>
                             <th>Status</th>
-                            <th>Editar</th>
-                            <th>Exlucir</th>
-                            <th>Gerar Nota</th>
+                            <th>Ações</th>
                             </thead>
                         </tr>
                         <tbody>
                         <?php foreach ($clients as $client) : ?>
                             <tr>
 
-                                <td><a class="link_text" href="<?=url('/admin/clients/nfse/'.$client->id)?>"><?= $client->company_name ?></a></td>
+                                <td><a class="link_text" href="<?=url('/admin/clients/nfse/'.$client->id)?>"><?= $client->name_project ?></a></td>
                                 <td><?= $client->name_stakeholder ?></td>
 
-                                <td><?=$client->cnpj?></td>
+                                <td><?=$client->pay_day?></td>
                                 <td><?= $client->advisor ?></td>
                                 <td class="<?= $client->status == 'ativo' ? 'ativo' : 'desativo'?>"><?= $client->status?></td>
 
-                                <td><a class="icon-pencil btn btn-blue" href="<?=url('admin/clients/areaClient/'.$client->id.'')?>">Editar</a></td>
+                                <td>
+                                    <a title="Editar" href="<?=url('admin/clients/areaClient/'.$client->id.'')?>"><i class="icon-pencil"></i></a>
+                                    <a title="Excluir" href="#"data-post="<?= url("admin/clients/areaClient"); ?>"
+                                       data-action="delete"
+                                       data-confirm="Tem certeza que deseja deletar este cliente?"
+                                       data-client_id="<?= $client->id; ?>"><i class="icon-trash-o"></i></a>
 
-                                <td> <a class="icon-trash-o btn btn-red" title="" href="#"
-                                        data-post="<?= url("admin/clients/areaClient"); ?>"
-                                        data-action="delete"
-                                        data-confirm="Tem certeza que deseja deletar esse cliente?"
-                                        data-client_id="<?= $client->id; ?>">Deletar</a></td>
-
-                                <td><a class="icon-folder btn btn-default viewDataClient" data-url="<?=CONF_URL_TEST?>" id="<?=$client->id?>" href="#">Nota</a></td>
-
+                                    <a href="#" data-url="<?=url()?>" class="callDataView" id="<?=$client->id?>" title="Verificar usuario"><i class="icon-user"></i></a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
 
@@ -65,11 +62,11 @@
     </div>
 </section>
 
-
+<!--Gerar nota fiscal-->
 <div id="modalNfseSend" class="modal-container">
     <div class="modal-content">
         <button class="fechar">X</button>
-        <h2 class="subtitulo">Enviar de Nota</h2>
+        <h2 class="subtitulo">Gerar de Nota</h2>
         <br>
         <div class="content-info" id="templeteModal">
 
@@ -88,3 +85,19 @@
         </form>
     </div>
 </div>
+
+
+<!--Ver usuario-->
+<div id="modalUser" class="modal-container">
+    <div class="modal-content">
+        <button class="fechar">X</button>
+        <h2 class="subtitulo">Dados do usuario</h2>
+        <br>
+        <div class="content-info" id="templeteModalUser">
+
+        </div>
+
+    </div>
+</div>
+
+

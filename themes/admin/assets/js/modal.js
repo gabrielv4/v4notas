@@ -43,6 +43,16 @@ modalNfse.forEach((e) => {
 });
 
 
+const modalGenereteInvoice = document.querySelectorAll('.modalGenereteInvoice');
+modalGenereteInvoice.forEach((e) => {
+    e.addEventListener('click', function(botao) {
+        var contentID = botao.target.id;
+        iniciaModal("modalNfseSend", contentID);
+
+    });
+});
+
+
 //Mostrar os erros das notas
 // const modalNotification = document.querySelectorAll('.modalNotification');
 // const showError = document.querySelector('.showError');
@@ -109,6 +119,8 @@ modalNfse.forEach((e) => {
             })
         }
     })
+
+
 
 
 

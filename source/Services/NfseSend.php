@@ -201,7 +201,7 @@ class NfseSend
                 "aliquota" => "4",
                 "iss_retido" => "false",
                 "item_lista_servico" => "0107",
-                "discriminacao" => $this->service == null ? "Serviços prestados" : $this->service
+                "discriminacao" => $this->service == null ? $this->order->invoice_description : $this->service
             )
         ];
 

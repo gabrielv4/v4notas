@@ -3,7 +3,7 @@
 
 <section class="dash_content_app">
     <header class="dash_content_app_header">
-        <h2 class="icon-home">Dash - Notas Fiscais</h2>
+        <h2 class="icon-home">Dash - Notas Fiscais / <button class="button-default modalGenereteInvoice" id="generete">Gerar Nota</button></h2>
         <form action="<?= url("/admin/dash/home"); ?>" method="post" class="app_search_form">
             <input type="text" name="s" value="<?= $search; ?>" placeholder="Pesquisar Nfse:">
             <button class="icon-search icon-notext"></button>
@@ -38,14 +38,14 @@
                                 <td>
                                     <?=$invoice->status == 'autorizado' ? "<b class='mt-2 text-success d-block' ><i class='bi bi-check-lg'></i> Nota Fiscal Emitida</b>" :
                                         ($invoice->status == 'processando_autorizacao' ? "<b class='mt-2 d-block text-info'><i class='bi bi-arrow-clockwise'></i> Processando NFSe</b>" :
-                                            ($invoice->status == 'erro_autorizacao' ? "<a id='$invoice->id' class='mt-2 text-danger modalNotification linkNotification viewDataError'  href='#' data-url=".CONF_URL_TEST." ><i class='bi bi-x-lg'></i> <b>Erro ao emitir NFSe</b></a>" :
+                                            ($invoice->status == 'erro_autorizacao' ? "<a id='$invoice->id' class='mt-2 text-danger modalNotification linkNotification viewDataError'  href='#' data-url=".url()." ><i class='bi bi-x-lg'></i> <b>Erro ao emitir NFSe</b></a>" :
                                                 ($invoice->status == 'cancelada' ? "<b class='mt-2 d-block text-warning'><i class='bi bi-exclamation-triangle-fill'></i> Nota cancelada</b>" : "<b class='mt-2 d-block text-warning'>Nota Fiscal Pendente</b>")))?>
                                 </td>
                                 <td><?=$invoice->invoice_number == null ? '---x---' : $invoice->invoice_number?></td>
 
                                 <td><a class="btn btn-default" <?=$invoice->link == '' ? "style='pointer-events: none;'" : ''?> href="<?=$invoice->link?>" target="_blank"> Nota</a></td>
                                 <td><?= date_fmt($invoice->send_at) ?></td>
-                                <td> <a class="icon-trash-o btn btn-red <?=($invoice->status == 'erro_autorizacao' or $invoice->status == 'cancelada') ? '' : 'viewData'?>" data-url="<?=CONF_URL_TEST?>"  id="<?=$invoice->invoice_code?>">Cancelar</a></td>
+                                <td> <a class="icon-trash-o btn btn-red <?=($invoice->status == 'erro_autorizacao' or $invoice->status == 'cancelada') ? '' : 'viewData'?>" data-url="<?=url()?>"  id="<?=$invoice->invoice_code?>">Cancelar</a></td>
                             </tr>
 
                         <?php endforeach; ?>
@@ -61,6 +61,32 @@
 </section>
 
 <!--JANELAS MODAIS-->
+
+<!--Modal para gerar nota-->
+<div id="modalNfseSend" class="modal-container">
+    <div class="modal-content">
+        <button class="fechar">X</button>
+        <h2 class="subtitulo">Gerar de Nota</h2>
+        <br>
+
+        <form action="<?=url('/admin/nfse/add')?>" method="POST" enctype="multipart/form-data">
+            <select class="selector_clients" name="client_id">
+                <option>Selecione o cliente...</option>
+                <?php foreach ($clients as $item):?>
+                    <option value="<?=$item->id?>"><?= $item->company_name. " - " . $item->cnpj ?></option>
+                <?php endforeach;?>
+            </select>
+            <fieldset class="form-model">
+                <input type="text" name="invoice_value" placeholder="Digite o valor da nota"/>
+                <input type="date" name="invoice_date" value="<?=date('Y-m-d')?>"/>
+                <textarea name="service" required id="service" placeholder="Informações sobre o serviço prestado" class="textarea-model"></textarea>
+            </fieldset>
+            <fieldset class="fieldset_model">
+                <button class="modal-button btn-yes" id="modal-button">Confirmar Envio</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
 
 <!--Cancelamento de nota-->
 <div id="modalNfse" class="modal-container">

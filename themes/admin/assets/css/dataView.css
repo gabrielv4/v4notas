@@ -1,0 +1,103 @@
+.customDataView{
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 2000;
+    display:none;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.removeDataView{
+    display: flex;
+
+}
+
+
+
+.navDataView{
+    background-color: #f2f2f2;
+    width: 55vw;
+    height: 100vh;
+    position: absolute;
+    overflow-y: auto;
+    transform: translateX(0vw);
+    left: 0%;
+    top: 0px;
+    transition: .5s;
+    box-shadow: 0 3px 15px rgb(0 0 0 / 0.3);
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 99999;
+    animation-duration: .5s;
+    animation-name: mostrar;
+}
+
+
+@keyframes mostrar{
+    from{
+        opacity: 0;
+        transform: translate3d(-100px, 0, 0);
+    }
+    to{
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+
+.listDataView{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0px;
+    text-align: center;
+    flex-wrap: wrap;
+}
+.listDataView b{
+    font-size: 17px;
+}
+
+.infoDataView .linha{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.infoDataView hr{
+    width: 90%;
+    height: 1px;
+    background-color: #dddddd;
+}
+.imgDataView{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.infoDataView img{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+
+}
+
+.titleDataView{
+    text-align: center;
+}
+
+.closeDataView{
+    color: #cf2b1e;
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    font-size: 20px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.closeDataView:hover{
+    color: red;
+    cursor: pointer;
+}

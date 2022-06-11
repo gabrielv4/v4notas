@@ -29,7 +29,7 @@ if($client){
                 //Verifica se o dia é o mesmo que o cliente pedio para imprimir a nota
                 //Por fim verifica se o contrato ainda está valido
                 if($nf->status != 'cancelada' && date_fmt_back_month($nf->send_at) != date('m')
-                    && $item->pay_day == $day && $item->status == 'ativo'
+                    && $item->invoice_day == $day && $item->status == 'ativo'
                     && $item->contract_duration > date('Y-m-d')){
 
                     $clientInvoice = (new Client())->findById($nf->client_id);
@@ -38,7 +38,7 @@ if($client){
 
 
                 }else if($nf->status == 'cancelada' && date_fmt_back_month($nf->send_at) == date('m')
-                    && $item->pay_day == $day && $item->status == 'ativo'
+                    && $item->invoice_day == $day && $item->status == 'ativo'
                     && $item->contract_duration > date('Y-m-d')){
 
                     $clientInvoice = (new Client())->findById($nf->client_id);
@@ -50,7 +50,7 @@ if($client){
         }else{
             //Caso o cliente não tenha notas criadas (cliente novo)
             //Verifica se o dia é o mesmo que o cliente pediu para imprimir a nota
-            if($item->pay_day == $day && $item->status == 'ativo' && $item->contract_duration > date('Y-m-d')){
+            if($item->invoice_day == $day && $item->status == 'ativo' && $item->contract_duration > date('Y-m-d')){
                 $clientInvoice = (new Client())->findById($item->id);
                 $invoice = (new NfseSend())->setOrder($clientInvoice);
                 $invoice->sendNfSe();

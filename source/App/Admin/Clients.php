@@ -88,7 +88,9 @@ class Clients extends Auth
             $clientCreate->first_payment = $data["first_payment"];
             $clientCreate->contract_duration = $data["contract_duration"];
             $clientCreate->pay_day = $data["pay_day"];
+            $clientCreate->invoice_day = $data["invoice_day"];
             $clientCreate->fee_value = settingPrice($data["fee_value"]);
+            $clientCreate->invoice_description = settingPrice($data["invoice_description"]);
             $clientCreate->advisor = $data["advisor"];
             $clientCreate->origin = $data["origin"];
             $clientCreate->status = 'ativo';
@@ -129,6 +131,7 @@ class Clients extends Auth
                 $clientUpdate->company_name = $data["company_name"];
                 $clientUpdate->cnpj = $data["cnpj"];
                 $clientUpdate->managing_partner = $data["managing_partner"];
+
                 $clientUpdate->cep = $data["cep"];
                 $clientUpdate->city = $data["city"];
                 $clientUpdate->uf = $data["uf"];
@@ -136,11 +139,14 @@ class Clients extends Auth
                 $clientUpdate->street = $data["street"];
                 $clientUpdate->number = $data["number"];
                 $clientUpdate->complement = $data["complement"];
+
                 $clientUpdate->start_project = $data["start_project"];
                 $clientUpdate->first_payment = $data["first_payment"];
                 $clientUpdate->contract_duration = $data["contract_duration"];
                 $clientUpdate->pay_day = $data["pay_day"];
+                $clientUpdate->invoice_day = $data["invoice_day"];
                 $clientUpdate->fee_value = $data["fee_value"];
+                $clientUpdate->invoice_description = $data["invoice_description"];
                 $clientUpdate->advisor = $data["advisor"];
                 $clientUpdate->origin = $data["origin"];
 
@@ -287,6 +293,85 @@ class Clients extends Auth
         echo $template;
     }
 
+    public function allDataClient(array $data)
+    {
+        $client = (new Client())->find("id = :id", "id={$data['client_id']}")->limit(1)->fetch();
+
+        $template = '
+                        <p><h2 class="titleDataView">Projeto - '.$client->name_project.'</h2></p>
+                        
+                          <div class="listDataView">
+                            <p><b>Nome do StackHolder:</b><br/> '.$client->name_stakeholder.' </p>
+                            <p><b>Telefone StackHolder:</b><br/> '.$client->name_project.'</p>
+                            <p><b>Email StackHolder:</b><br/> '.$client->name_project.'</p>
+                        </div>
+                
+                        <div class="linha"> <hr></div>
+                
+                        <div class="listDataView">
+                            <p><b>Razão Social:</b><br/> '.$client->company_name.'</p>
+                            <p><b>CNPJ:</b><br/> '.$client->cnpj.'</p>
+                            <p><b>Socio Gerente:</b><br/> '.$client->managing_partner.'</p>
+                        </div>
+                
+                        <div class="linha"> <hr></div>
+                
+                        <div class="listDataView">
+                            <p><b>Representante financeiro:</b><br/> '.$client->financial_name.'</p>
+                            <p><b>Email do financeiro:</b><br/> '.$client->financial_email.'</p>
+                        </div>
+                        <div class="linha"> <hr></div>
+                
+                        <div class="listDataView">
+                            <p><b>CEP:</b><br/> '.$client->cep.'</p>
+                            <p><b>Cidade:</b><br/> '.$client->ciry.'</p>
+                            <p><b>UF:</b><br/> '.$client->uf.'</p>
+                        </div>
+                
+                        <div class="linha"> <hr></div>
+                
+                        <div class="listDataView">
+                            <p><b>Bairro</b>:<br/> '.$client->district.'</p>
+                            <p><b>Rua</b>:</br> '.$client->street.'</p>
+                            <p><b>Numero:</b></br> '.$client->number.'</p>
+                            <p><b>Complemento</b>:</br> '.$client->complement.'</p>
+                        </div>
+                
+                        <div class="linha"> <hr></div>
+                
+                        <div class="listDataView">
+                            <p><b>Inicio do Projeto:</b><br/> '.$client->start_project.'</p>
+                            <p><b>Primeiro Pagamento:</b></br> '.$client->first_payment.'</p>
+                            <p><b>Duração do Contrato:</b><br/> '.$client->first_payment.'</p>
+                        </div>
+                
+                        <div class="linha"> <hr></div>
+                
+                        <div class="listDataView">
+                            <p><b>Dia do pagamento:</b></br> '.$client->pay_day.'</p>
+                            <p><b>Dia para receber a nota:</b></br> '.$client->invoice_day.'</p>
+                            <p><b>Valor do Fee:</b><br/> '.$client->fee_value.'</p>
+                        </div>
+                
+                        <div class="linha"> <hr></div>
+                
+                        <div class="listDataView">
+                            <p><b>Assessor:</b><br/> '.$client->advisor.'</p>
+                            <p><b>Origem:</b><br/> '.$client->origin.'</p>
+                            <p><b>Status do Cliente:</b><br/> '.$client->status.'</p>
+                            <p><b>Status da Nota:</b><br/> '.$client->generate_invoice.'</p>
+                        </div>
+                
+                        <div class="linha"> <hr></div>
+                
+                        <div class="listDataView">
+                            <p><b>Descrição da Nota:</b><br/> '.$client->invoice_description.'</p>
+                        </div>
+                                   
+                    ';
+
+        echo $template;
+    }
 
 
 

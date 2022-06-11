@@ -103,6 +103,7 @@ $route->post("/settings/updateAccount/{admin_id}", "Settings:updateAccount");
 
 // Admin -> Admin Invoice
 $route->get("/clientFind/{client_id}", "Clients:findClient");
+$route->get("/clientAllData/{client_id}", "Clients:allDataClient");
 $route->post("/nfseFind/{invoice_code}", "Nfse:findNfse");
 $route->post("/nfseError/{invoice_code}", "Nfse:errorNfse");
 

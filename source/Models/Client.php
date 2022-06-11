@@ -32,12 +32,13 @@ class Client extends Model
             "district",
             "street",
             "number",
-            "complement",
             "start_project",
             "first_payment",
             "contract_duration",
             "pay_day",
+            "invoice_day",
             "fee_value",
+            "invoice_description",
             "advisor",
             "origin",
             "status"
@@ -68,7 +69,9 @@ class Client extends Model
         string $first_payment,
         string $contract_duration,
         string $pay_day,
+        string $invoice_day,
         string $fee_value,
+        string $invoice_description,
         string $advisor,
         string $origin,
         string $status
@@ -94,7 +97,9 @@ class Client extends Model
         $this->first_payment = $first_payment;
         $this->contract_duration = $contract_duration;
         $this->pay_day = $pay_day;
+        $this->invoice_day = $invoice_day;
         $this->fee_value = $fee_value;
+        $this->invoice_description = $invoice_description;
         $this->advisor = $advisor;
         $this->origin = $origin;
         $this->status = $status;
@@ -121,7 +126,7 @@ class Client extends Model
 
     public function findByDay(string $day, string $columns = "*"): ?array
     {
-        $find = $this->find("pay_day = :day ", "day={$day}", $columns);
+        $find = $this->find("invoice_day = :day ", "day={$day}", $columns);
         return $find->fetch(true);
     }
 

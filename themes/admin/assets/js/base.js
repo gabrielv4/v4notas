@@ -446,4 +446,31 @@ if (document.body.contains(nameStakeholder)) {
     feeValue.addEventListener('keyup', () => {
         writeFeeValue.innerHTML = feeValue.value;
     });
+
+
+    // Dia de gerar a nota
+    let invoiceDay = document.querySelector('#invoice_day');
+    let writeInvoiceDay = document.querySelector('.write_invoice_day');
+
+    if (invoiceDay.value == 0) {
+        writeInvoiceDay.innerHTML = '<b style="color:#cf2b1e;font-style: italic;">Não preenchido</b>';
+    } else {
+        writeInvoiceDay.innerHTML = invoiceDay.value;
+    }
+    invoiceDay.addEventListener('keyup', () => {
+        writeInvoiceDay.innerHTML = invoiceDay.value;
+    });
+
+    // Dia de gerar a nota
+    let invoiceDescription = document.querySelector('#invoice_description');
+    let writeInvoiceDescription = document.querySelector('.write_invoice_description');
+
+    if (invoiceDescription.value == 0) {
+        writeInvoiceDescription.innerHTML = '<b style="color:#cf2b1e;font-style: italic;">Não preenchido</b>';
+    } else {
+        writeInvoiceDescription.innerHTML = invoiceDescription.value;
+    }
+    invoiceDescription.addEventListener('keyup', () => {
+        writeInvoiceDescription.innerHTML = invoiceDescription.value;
+    });
 }
