@@ -41,13 +41,13 @@
                                 <td class="<?= $client->status == 'ativo' ? 'ativo' : 'desativo'?>"><?= $client->status?></td>
 
                                 <td>
-                                    <a title="Editar" href="<?=url('admin/clients/areaClient/'.$client->id.'')?>"><i class="icon-pencil"></i></a>
+                                    <a title="Editar" href="<?=url('admin/clients/areaClient/'.$client->id.'')?>"><i class="icon-pencil icon_edit"></i></a>
                                     <a title="Excluir" href="#"data-post="<?= url("admin/clients/areaClient"); ?>"
                                        data-action="delete"
                                        data-confirm="Tem certeza que deseja deletar este cliente?"
-                                       data-client_id="<?= $client->id; ?>"><i class="icon-trash-o"></i></a>
+                                       data-client_id="<?= $client->id; ?>"><i class="icon-trash-o icon_delete"></i></a>
 
-                                    <a href="#" data-url="<?=url()?>" class="callDataView" id="<?=$client->id?>" title="Verificar usuario"><i class="icon-user"></i></a>
+                                    <a href="#" data-url="<?=url()?>" class="callDataView" id="<?=$client->id?>" title="Verificar usuario"><i class="icon-user icon_info"></i></a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
