@@ -398,7 +398,7 @@
                     <label class="label">
                         <span class="legend">*Gerar nota fiscal automaticamente:</span>
                         <label class="switch switch-danger">
-                            <input id="switch2"  class="generateInvoice"  data-id="<?=$client->id?>" data-url="<?=url()?>" name="generate_invoice" type="checkbox" />
+                            <input id="switch2"  class="generateInvoice"  data-id="<?=$client->id?>" <?=$client->generate_invoice == 'ativo' ? 'checked' : ''?> data-url="<?=url()?>" name="generate_invoice" type="checkbox" />
                             <span class="switch-slider"></span>
                         </label>
                     </label>

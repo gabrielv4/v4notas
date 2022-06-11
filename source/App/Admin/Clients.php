@@ -369,7 +369,7 @@ class Clients extends Auth
                         <div class="listDataView">
                             <p><b>Inicio do Projeto:</b><br/> '.date_fmt_back_br($client->start_project).'</p>
                             <p><b>Primeiro Pagamento:</b></br> '.date_fmt_back_br($client->first_payment).'</p>
-                            <p><b>Duração do Contrato:</b><br/> '.date_fmt_back_br($client->first_payment).'</p>
+                            <p><b>Duração do Contrato:</b><br/> '.date_fmt_back_br($client->contract_duration).'</p>
                         </div>
                 
                         <div class="linha"> <hr></div>
@@ -386,7 +386,7 @@ class Clients extends Auth
                             <p><b>Assessor:</b><br/> '.$client->advisor.'</p>
                             <p><b>Origem:</b><br/> '.$client->origin.'</p>
                             <p><b>Status do Cliente:</b><br/> '.$client->status.'</p>
-                            <p><b>Status da Nota:</b><br/> '.$client->generate_invoice.'</p>
+                            <p><b>Gerador automatico de nota:</b><br/> '.$client->generate_invoice.'</p>
                         </div>
                 
                         <div class="linha"> <hr></div>
