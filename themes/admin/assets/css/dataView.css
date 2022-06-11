@@ -36,6 +36,27 @@
     animation-name: mostrar;
 }
 
+/* Designing for scroll-bar */
+.navDataView::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+.navDataView::-webkit-scrollbar-track {
+    background: gainsboro;
+    border-radius: 5px;
+}
+
+/* Handle */
+.navDataView::-webkit-scrollbar-thumb {
+    background: #1e3056;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+.navDataView::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 
 @keyframes mostrar{
     from{

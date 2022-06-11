@@ -628,7 +628,7 @@ p {
 
 .icon_edit{
     color: #2f80ed;
-    font-size: 20px;
+    font-size: 21px;
 }
 .icon_edit:hover{
     color: #56ccf2;
@@ -636,17 +636,17 @@ p {
 
 .icon_delete{
     color: #cf2b1e;
-    font-size: 20px;
+    font-size: 21px;
 }
 .icon_delete{
     color: #FF0000;
 }
 .icon_info{
-    color: #7952b3;
-    font-size: 20px;
+    color: #424093;
+    font-size: 21px;
 }
 .icon_info:hover{
-    color: #bb6bd9;
+    color: #7952b3;
 }
 @media (min-width: 42em) {
     .app_form .label_g2 {

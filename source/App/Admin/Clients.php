@@ -94,6 +94,7 @@ class Clients extends Auth
             $clientCreate->advisor = $data["advisor"];
             $clientCreate->origin = $data["origin"];
             $clientCreate->status = 'ativo';
+            $clientCreate->generate_invoice = isset($data['generate_invoice']) ? 'ativo' : 'inativo' ;
 
 
 
@@ -149,6 +150,7 @@ class Clients extends Auth
                 $clientUpdate->invoice_description = $data["invoice_description"];
                 $clientUpdate->advisor = $data["advisor"];
                 $clientUpdate->origin = $data["origin"];
+                $clientUpdate->generate_invoice = isset($data['generate_invoice']) ? 'ativo' : 'inativo' ;
 
 
 
@@ -221,6 +223,31 @@ class Clients extends Auth
             $clientStatus->status = 'ativo';
         }else{
             $clientStatus->status = 'inativo';
+        }
+
+        if (!$clientStatus->save()) {
+            $json["message"] = $clientStatus->message()->render();
+            echo json_encode($json);
+            return;
+        }
+
+    }
+
+    public function settingStatusInvoice(array $data)
+    {
+        $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
+        $clientStatus = (new Client())->findById($data["client_id"]);
+
+        if (!$clientStatus) {
+            $this->message->error("Você tentou gerenciar um cliente que não existe")->flash();
+            echo json_encode(["redirect" => url("/admin/clients/home")]);
+            return;
+        }
+
+        if($data['status'] == 'true'){
+            $clientStatus->generate_invoice = 'ativo';
+        }else{
+            $clientStatus->generate_invoice = 'inativo';
         }
 
         if (!$clientStatus->save()) {
@@ -340,9 +367,9 @@ class Clients extends Auth
                         <div class="linha"> <hr></div>
                 
                         <div class="listDataView">
-                            <p><b>Inicio do Projeto:</b><br/> '.$client->start_project.'</p>
-                            <p><b>Primeiro Pagamento:</b></br> '.$client->first_payment.'</p>
-                            <p><b>Duração do Contrato:</b><br/> '.$client->first_payment.'</p>
+                            <p><b>Inicio do Projeto:</b><br/> '.date_fmt_back_br($client->start_project).'</p>
+                            <p><b>Primeiro Pagamento:</b></br> '.date_fmt_back_br($client->first_payment).'</p>
+                            <p><b>Duração do Contrato:</b><br/> '.date_fmt_back_br($client->first_payment).'</p>
                         </div>
                 
                         <div class="linha"> <hr></div>
@@ -350,7 +377,7 @@ class Clients extends Auth
                         <div class="listDataView">
                             <p><b>Dia do pagamento:</b></br> '.$client->pay_day.'</p>
                             <p><b>Dia para receber a nota:</b></br> '.$client->invoice_day.'</p>
-                            <p><b>Valor do Fee:</b><br/> '.$client->fee_value.'</p>
+                            <p><b>Valor do Fee:</b><br/> '.str_price($client->fee_value).'</p>
                         </div>
                 
                         <div class="linha"> <hr></div>

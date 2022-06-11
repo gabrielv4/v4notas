@@ -26,14 +26,14 @@ class Nfse extends  Admin
         //Verificando o status do cliente
         if($client->status != 'ativo'){
             $this->message->warning("O cliente está com o status inativo, ative para gerar a nota")->flash();
-            redirect('/admin/clients/home');
+            redirect('/admin/dash/home');
             return;
         }
 
         //Verificando se o contrato está vencido
         if($client->contract_duration < date('Y-m-d')){
             $this->message->warning("O contrato desse cliente já venceu")->flash();
-            $json["redirect"] = url("/admin/clients/home");
+            $json["redirect"] = url("/admin/dash/home");
             echo json_encode($json);
             return;
 
@@ -43,7 +43,7 @@ class Nfse extends  Admin
         //Se possui verifica se a ultima nota gerada é do mês atual se for ele não gera uma nova
         if(!empty($invoice) && $invoice->status != 'cancelada' && date_fmt_back_month($invoice->send_at) == date('m')){
             $this->message->warning("O cliente já possui uma nota do mês ". date_fmt_back_month($invoice->send_at))->flash();
-            $json["redirect"] = url("/admin/clients/home");
+            $json["redirect"] = url("/admin/dash/home");
             echo json_encode($json);
             return;
         }

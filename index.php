@@ -78,6 +78,8 @@ $route->get("/clients/home/{search}/{page}", "Clients:home");
 $route->get("/clients/status/{client_id}/{status}", "Clients:settingStatusCompany");
 $route->post("/clients/status/{client_id}/{status}", "Clients:settingStatusCompany");
 
+$route->get("/clients/statusGenerateInvoice/{client_id}/{status}", "Clients:settingStatusInvoice");
+$route->post("/clients/statusGenerateInvoice/{client_id}/{status}", "Clients:settingStatusInvoice");
 
 
 

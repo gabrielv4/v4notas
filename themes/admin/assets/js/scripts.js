@@ -413,6 +413,32 @@ $(document).ready(function() {
 });
 
 
+$(document).ready(function() {
+    $('.generateInvoice').on('click', function() {
+        let idUserInvoice = $(this).attr('data-id');
+        let urlUserInvoice = $(this).attr('data-url');
+        let enabledUserInvoice = $(this).is(':checked');
+        console.log(idUserInvoice);
+        console.log(enabledUserInvoice);
+        $.ajax({
+            url: urlUserInvoice+"/admin/clients/statusGenerateInvoice/"+idUserInvoice+'/'+enabledUserInvoice,
+            method: "POST",
+            dataType: "applicatin/json",
+            data: {
+                "id": idUserInvoice,
+                "enabled": enabledUserInvoice
+            },
+            success: function(data) {
+                console.log("Deu certo");
+            },
+            error: function(err) {
+                console.log(this.url);
+            }
+        });
+    });
+});
+
+
 
 
 
