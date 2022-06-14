@@ -383,7 +383,7 @@
 
                     <label class="label">
                         <span class="legend">*Descrição da nota:</span>
-                        <textarea id="invoice_description" value="<?=$client->invoice_description?>" placeholder="Coloque aqui a descrição da nota" name="invoice_description"></textarea>
+                        <textarea id="invoice_description" placeholder="Coloque aqui a descrição da nota" name="invoice_description"><?=$client->invoice_description?></textarea>
                     </label>
 
                     <label class="label">
