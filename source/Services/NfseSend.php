@@ -186,7 +186,7 @@ class NfseSend
             "tomador" => array(
                 "cnpj" => str_replace(['.', '-', '/'], '', $this->order->cnpj),
                 "razao_social" => $this->order->company_name,
-                "email" => $this->order->email_stakeholder,
+                "email" => $this->order->financial_email,
                 "endereco" => array(
                     "codigo_municipio" => CONF_NFSE_COMPANY['codigo_municipio'],
                     "bairro" => $this->order->district,

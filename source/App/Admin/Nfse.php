@@ -41,12 +41,12 @@ class Nfse extends  Admin
 
         //verifica se ele possui alguma nota
         //Se possui verifica se a ultima nota gerada é do mês atual se for ele não gera uma nova
-        if(!empty($invoice) && $invoice->status != 'cancelada' && date_fmt_back_month($invoice->send_at) == date('m')){
-            $this->message->warning("O cliente já possui uma nota do mês ". date_fmt_back_month($invoice->send_at))->flash();
-            $json["redirect"] = url("/admin/dash/home");
-            echo json_encode($json);
-            return;
-        }
+//        if(!empty($invoice) && $invoice->status != 'cancelada' && date_fmt_back_month($invoice->send_at) == date('m')){
+//            $this->message->warning("O cliente já possui uma nota do mês ". date_fmt_back_month($invoice->send_at))->flash();
+//            $json["redirect"] = url("/admin/dash/home");
+//            echo json_encode($json);
+//            return;
+//        }
 
 
 

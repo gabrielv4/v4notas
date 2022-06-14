@@ -3,7 +3,7 @@
 
 <section class="dash_content_app">
     <header class="dash_content_app_header">
-        <h2 class="icon-home">Dash - Notas Fiscais / <button class="button-default modalGenereteInvoice" id="generete">Gerar Nota</button></h2>
+        <h2 class="icon-home">Dash - Notas Fiscais <?=isset($infoClient->company_name) ? ' - '.$infoClient->company_name : ''?> / <button class="button-default modalGenereteInvoice" id="generete">Gerar Nota</button></h2>
         <form action="<?= url("/admin/dash/home"); ?>" method="post" class="app_search_form">
             <input type="text" name="s" value="<?= $search; ?>" placeholder="Pesquisar Nfse:">
             <button class="icon-search icon-notext"></button>
@@ -14,9 +14,9 @@
         <section>
             <div class="app_blog_home">
                 <?php if (empty($nfse)) : ?>
-
                     <div class="message info icon-info">Ainda não existem notas cadastrados.</div>
                 <?php else : ?>
+
                     <table class="table">
                         <tr>
                             <thead>
@@ -66,15 +66,22 @@
 <div id="modalNfseSend" class="modal-container">
     <div class="modal-content">
         <button class="fechar">X</button>
-        <h2 class="subtitulo">Gerar de Nota</h2>
+        <h2 class="subtitulo">Gerar Nota Fiscal <?=isset($infoClient->company_name) ? ' para '.$infoClient->company_name : ''?></h2>
         <br>
 
         <form action="<?=url('/admin/nfse/add')?>" method="POST" enctype="multipart/form-data">
             <select class="selector_clients" name="client_id">
-                <option>Selecione o cliente...</option>
-                <?php foreach ($clients as $item):?>
-                    <option value="<?=$item->id?>"><?= $item->company_name. " - " . $item->cnpj ?></option>
-                <?php endforeach;?>
+                <?php if(!isset($infoClient)):?>
+                    <option>Selecione o cliente...</option>
+                    <?php foreach ($clients as $item):?>
+                        <option value="<?=$item->id?>"><?= $item->company_name. " - " . $item->cnpj ?></option>
+                    <?php endforeach;?>
+                <?php else:?>
+                    <?php foreach ($clients as $item):?>
+                        <option value="<?=$item->id?>"><?= $item->company_name. " - " . $item->cnpj ?></option>
+                    <?php endforeach;?>
+                <?php endif;?>
+
             </select>
             <fieldset class="form-model">
                 <input type="text" name="invoice_value" placeholder="Digite o valor da nota"/>

@@ -270,6 +270,8 @@ class Clients extends Auth
 
         $search = null;
         $nfse = (new NfseModel())->find("client_id = :id", "id={$data['client_id']}");
+        $clients = (new Client())->find("id = :id", "id={$data['client_id']}");
+
 
         if (!empty($data["search"]) && str_search($data["search"]) != "all") {
             $search = str_search($data["search"]);
@@ -301,6 +303,8 @@ class Clients extends Auth
             "app" => "clients/nfseClient",
             "head" => $head,
             "nfse" => $nfse->limit($pager->limit())->offset($pager->offset())->fetch(true),
+            "clients" => $clients->fetch(true),
+            "infoClient" => (new Client())->findById($data['client_id']),
             "paginator" => $pager->render(),
             "search" => $search,
         ]);
