@@ -24,8 +24,10 @@
                             <th>StakeHolder</th>
 
                             <th>Dia do Pagamento</th>
+                            <th>Dia da Emissão da Nota</th>
                             <th>Assessor</th>
-                            <th>Status</th>
+                            <th>Cliente</th>
+                            <th>Nota automática</th>
                             <th>Ações</th>
                             </thead>
                         </tr>
@@ -37,8 +39,10 @@
                                 <td><?= $client->name_stakeholder ?></td>
 
                                 <td><?=$client->pay_day?></td>
+                                <td><?=$client->invoice_day?></td>
                                 <td><?= $client->advisor ?></td>
                                 <td class="<?= $client->status == 'ativo' ? 'ativo' : 'desativo'?>"><?= $client->status?></td>
+                                <td class="<?= $client->generate_invoice == 'ativo' ? 'ativo' : 'desativo'?>"><?= $client->generate_invoice?></td>
 
                                 <td>
                                     <a title="Editar" href="<?=url('admin/clients/areaClient/'.$client->id.'')?>"><i class="icon-pencil icon_edit"></i></a>
